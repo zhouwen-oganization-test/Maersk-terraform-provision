@@ -94,9 +94,3 @@
           working-directory: ${{ env.working-directory }}
           env:
             TF_VAR_assume_role: "my-github-actions-role"
-  
-        - name: Install InSpec
-          uses: actionshub/chef-install@main
-          with:
-            channel: current
-            project: inspec
