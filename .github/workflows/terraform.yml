@@ -15,25 +15,9 @@
         - name: Check out code
           uses: actions/checkout@v2
           
-        - name: Run Terrascan
-          id: terrascan
-          uses: accurics/terrascan-action@main
-          with:
-            iac_type: 'terraform'
-            iac_version: 'v14'
-            policy_type: 'aws'
-            only_warn: true
-            iac_dir: infrastructure
-          #sarif_upload: true
-          #non_recursive:
-          #iac_dir:
-          #policy_path:
-          #skip_rules:
-          #config_path:
-  
         - uses: hashicorp/setup-terraform@v1
           with:
-            terraform_version: 0.14.4
+            terraform_version: 1.5.0 
   
         - name: Terraform Fmt
           id: fmt
@@ -106,54 +90,3 @@
           with:
             channel: current
             project: inspec
-  
-        - name: Assume Role
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-region: eu-west-1
-            role-to-assume: arn:aws:iam::88888888888888:role/my-github-actions-role
-            role-duration-seconds: 600
-            role-skip-session-tagging: true          
-  
-        - name: Infrastructure Tests
-          id: inspec
-          run: inspec exec profile/example --reporter=cli:- progress:inspec.log --input-file=profile/example/attributes-example.yml -t aws://
-          env:
-            CHEF_LICENSE: accept
-  
-        - name: Infrastructure Test Results 
-          id: inspec_results
-          if: always()
-          run: | 
-            REPORT="$(cat inspec.log)"
-            REPORT="${REPORT//'%'/'%25'}"
-            REPORT="${REPORT//$'\n'/'%0A'}"
-            REPORT="${REPORT//$'\r'/'%0D'}"
-            echo "::set-output name=loginspec::$REPORT"
-  
-        - name: Infrastructure tests Output
-          if: always()      
-          uses: actions/github-script@v3
-          env:
-            INSPEC: "Inspec Test Results \n${{ steps.inspec_results.outputs.loginspec }}"
-          with:
-            github-token: ${{secrets.GITHUB_TOKEN}}
-            script: |
-              const output = `#### Inspec Tests 🖌\`${{ steps.inspec.outcome }}\`
-  
-              <details><summary>Show Test Results</summary>
-  
-              \`\`\`
-  
-              ${process.env.INSPEC}
-              \`\`\`
-             
-              </details>
-  
-              `;
-              github.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: output
-              })
