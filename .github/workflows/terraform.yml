@@ -33,9 +33,9 @@
               if [[ $file != "staging/account-staging-a/service-staging-a/"* ]]; then
                 echo "This file is not under the directory 'service-staging-a'."
                 echo "{run_job}={false}" >> $GITHUB_OUTPUT
-                break
               else
                 echo "{run_job}={true}" >> $GITHUB_OUTPUT
+                break
               fi
             done < files.txt
 
