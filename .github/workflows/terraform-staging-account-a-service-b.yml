@@ -1,5 +1,5 @@
 ---
-  name: "Demo for staging account-a service-b"
+  name: "Demo for staging account-a service-a"
   
   "on":
     pull_request:
@@ -15,7 +15,7 @@
     
   jobs:
     terraform:
-      name: Terraform deploy
+      name: Terraform work flow 
       runs-on: ubuntu-latest
       env:
         working-directory: staging/account-staging-a/service-staging-b
@@ -86,9 +86,10 @@
                 repo: context.repo.repo,
                 body: output
               })
-  
+
         - name: Terraform apply
           id: apply
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+          if: github.ref == 'refs/heads/main' && github.event_name == 'pull_request'
           run: terraform apply -auto-approve -input=false
           working-directory: ${{ env.working-directory }}
+
