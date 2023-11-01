@@ -35,6 +35,7 @@
             git diff --name-only HEAD^ HEAD > files.txt
             while IFS= read -r file
             do
+              echo type(${{env.workspaces}})
               echo $file
               for ws in ${{env.workspaces}}
               do
