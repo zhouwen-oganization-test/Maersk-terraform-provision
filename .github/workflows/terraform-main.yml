@@ -36,6 +36,7 @@
             while IFS= read -r file
             do
               echo $file
+              echo $env.workspace
               for ws in ${{env.workspaces}}
               do
                 if [[ $file != "$ws/"* ]]; then
