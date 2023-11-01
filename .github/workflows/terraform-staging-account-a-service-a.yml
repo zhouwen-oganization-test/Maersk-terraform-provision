@@ -3,69 +3,23 @@
   
   "on":
     pull_request:
-    push: { branches: [main] }
+      paths:
+        - staging/account-staging-a/service-staging-a/*
+    push:
+      paths:
+        - staging/account-staging-a/service-staging-a/*
+     
   permissions:
     id-token: write # This is required for requesting the JWT
     contents: read  # This is required for actions/checkout
     
   
   jobs:
-    check:
-      name: Check changed files
-      env:
-        workspaces: |
-          staging/account-staging-a/service-staging-a
-          staging/account-staging-a/service-staging-b
-          staging/account-staging-b/service-staging-c
-          staging/account-staging-b/service-staging-d
-      outputs:
-        run_job: ${{ steps.check_files.outputs.run_job }}
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 2
-        - name: check files
-          id: check_files
-          run: |
-            echo "=============== list changed files ==============="
-            git diff --name-only HEAD^ HEAD
-            echo "========== check paths of changed files =========="
-            git diff --name-only HEAD^ HEAD > files.txt
-            echo "${{env.workspaces}}"
-            while IFS= read -r file
-            do
-              echo $file
-              for ws in ${{env.workspaces}}
-              do
-                echo $ws
-                if [[ $file != "$ws/"* ]]; then
-                  echo "This file is not under the directory $ws."
-                else
-                  echo "run_job.$ws=true" >> $GITHUB_OUTPUT
-                  break
-                fi
-              done
-            done < files.txt
-
-    debug:
-      name: Check files output
-      needs: check
-      runs-on: ubuntu-latest
-      steps:
-        - name: echo output
-          id: echo
-          run: |
-            echo "${{needs.check.outputs.run_job}}"
-
     terraform:
       name: Terraform deploy
-      needs: check
-      if: needs.check.outputs.run_job != 'false'
       runs-on: ubuntu-latest
       env:
-        working-directory: ${{needs.check.outputs.run_job}}
+        working-directory: staging/account-staging-a/service-staging-a
         TF_WORKSPACE: my-workspace 
       steps:
         - name: Check out code
