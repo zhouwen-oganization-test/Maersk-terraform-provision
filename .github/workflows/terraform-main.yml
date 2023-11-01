@@ -1,5 +1,5 @@
 ---
-  name: "GitHub Actions Demo"
+  name: "Terraform GitHub Actions Demo"
   
   "on":
     pull_request:
@@ -12,6 +12,13 @@
   jobs:
     check:
       name: Check changed files
+      strategy:
+        matrix:
+          tf_workspaces:
+            - staging/account-staging-a/service-staging-a
+            - staging/account-staging-a/service-staging-b
+            - staging/account-staging-b/service-staging-c
+            - staging/account-staging-b/service-staging-d
       outputs:
         run_job: ${{ steps.check_files.outputs.run_job }}
       runs-on: ubuntu-latest
@@ -30,22 +37,22 @@
             while IFS= read -r file
             do
               echo $file
-              if [[ $file != "staging/account-staging-a/service-staging-a/"* ]]; then
-                echo "This file is not under the directory 'service-staging-a'."
+              if [[ $file != "${{matrix.tf_workspaces}}"* ]]; then
+                echo "This file is not under the directory '${{matrix.tf_workspaces}}'."
                 echo "run_job=false" >> $GITHUB_OUTPUT
               else
-                echo "run_job=true" >> $GITHUB_OUTPUT
+                echo "run_job=${{matrix.tf_workspaces}}" >> $GITHUB_OUTPUT
                 break
               fi
             done < files.txt
 
     terraform:
-      name: terraform
+      name: Terraform deploy
       needs: check
-      if: needs.check.outputs.run_job == 'true'
+      if: needs.check.outputs.run_job != 'false'
       runs-on: ubuntu-latest
       env:
-        working-directory: staging/account-staging-a/service-staging-a
+        working-directory: needs.check.outputs.run_job
         TF_WORKSPACE: my-workspace 
       steps:
         - name: Check out code
