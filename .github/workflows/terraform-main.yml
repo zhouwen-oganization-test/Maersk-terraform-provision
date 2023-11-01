@@ -46,6 +46,15 @@
               fi
             done < files.txt
 
+    debug:
+      name: Check files output
+      needs: check
+      runs-on: ubuntu-latest
+      steps:
+        - name: echo output
+          id: echo
+          run: |
+            echo "${{needs.check.outputs.run_job}}"
     terraform:
       name: Terraform deploy
       needs: check
