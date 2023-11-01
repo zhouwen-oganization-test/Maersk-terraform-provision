@@ -51,7 +51,7 @@
     terraform:
       runs-on: ubuntu-latest
       env:
-        working-directory: AppTest/AccountTest/ServiceTest 
+        working-directory: staging/account-staging-a/service-staging-a
         TF_WORKSPACE: my-workspace 
       steps:
         - name: Check out code
