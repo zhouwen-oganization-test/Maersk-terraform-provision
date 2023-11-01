@@ -33,12 +33,12 @@
             git diff --name-only HEAD^ HEAD
             echo "========== check paths of changed files =========="
             git diff --name-only HEAD^ HEAD > files.txt
-            echo "${{env.workspaces}}"
             while IFS= read -r file
             do
               echo $file
               for ws in ${{env.workspaces}}
               do
+                echo $ws
                 if [[ $file != "$ws/"* ]]; then
                   echo "This file is not under the directory $ws."
                 else
