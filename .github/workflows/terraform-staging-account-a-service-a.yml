@@ -14,9 +14,8 @@
     contents: read  # This is required for actions/checkout
     
   jobs:
-    terraform-plan:
-      name: Terraform plan 
-      if: github.ref != 'refs/heads/main'
+    terraform:
+      name: Terraform work flow 
       runs-on: ubuntu-latest
       env:
         working-directory: staging/account-staging-a/service-staging-a
@@ -88,83 +87,9 @@
                 body: output
               })
 
-    terraform-apply:
-      name: Terraform apply
-      if: github.ref == 'refs/heads/main'
-      runs-on: ubuntu-latest
-      env:
-        working-directory: staging/account-staging-a/service-staging-a
-        TF_WORKSPACE: my-workspace 
-      steps:
-        - name: Check out code
-          uses: actions/checkout@v2
-          
-        - uses: hashicorp/setup-terraform@v2
-          with:
-            terraform_version: 1.5.0 
-
-        - name: Configure AWS Credentials
-          uses: aws-actions/configure-aws-credentials@v4
-          with:
-            role-to-assume: arn:aws:iam::129980683758:role/Github-runner-access-role
-            aws-region: ap-southeast-1
-
-        - name: Terraform Fmt
-          id: fmt
-          run: terraform fmt -check
-          continue-on-error: true
-  
-        - name: Terraform init
-          id: init
-          run: terraform init
-          working-directory: ${{ env.working-directory }}
-  
-        - name: Terraform validate
-          id: validate
-          run: terraform validate
-  
-        - name: Terraform plan
-          id: plan
-          run: terraform plan -no-color
-          working-directory: ${{ env.working-directory }}
-  
-        - name: Plan output
-          id: output
-          uses: actions/github-script@v3
-          if: github.event_name == 'pull_request'
-          env:
-            PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-          with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-            script: |
-              const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-              ### Workspace
-  
-              \`${process.env.TF_WORKSPACE}\`
-  
-              #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-              #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-              <details><summary>Show Plan</summary>
-  
-              \`\`\`hcl
-              ${process.env.PLAN}
-              \`\`\`
-  
-              </details>
-  
-              **Pusher**: @${{ github.actor }}
-              **Action**: ${{ github.event_name }}
-              `;
-              github.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: output
-              })
-  
         - name: Terraform apply
           id: apply
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+          if: github.ref == 'refs/heads/main' && github.event_name == 'pull_request'
           run: terraform apply -auto-approve -input=false
           working-directory: ${{ env.working-directory }}
 
