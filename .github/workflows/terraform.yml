@@ -10,6 +10,44 @@
     
   
   jobs:
+    check:
+      name: Check changed files
+      outputs:
+        run_job: ${{ steps.check_files.outputs.run_job }}
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 2
+        - name: check files
+          id: check_files
+          run: |
+            echo "=============== list changed files ==============="
+            git diff --name-only HEAD^ HEAD
+            echo "========== check paths of changed files =========="
+            git diff --name-only HEAD^ HEAD &gt; files.txt
+            while IFS= read -r file
+            do
+              echo $file
+              if [[ $file != "staging/account-staging-a/service-staging-a/"* ]]; then
+                echo "This file is not under the directory 'service-staging-a'."
+                echo "::set-output name=run_job::false"
+                break
+              else
+                echo "::set-output name=run_job::true"
+              fi
+            done &lt; files.txt
+  
+    job_for_env1:
+      name: Job for env1
+      needs: check
+      if: needs.check.outputs.run_job == 'true'
+      runs-on: ubuntu-latest
+      steps:
+        - name: run for env1
+          run: echo "Updates made to env1"
+
     terraform:
       runs-on: ubuntu-latest
       env:
@@ -38,9 +76,6 @@
           id: init
           run: terraform init
           working-directory: ${{ env.working-directory }}
-          env:
-            TF_CLI_ARGS_init: "-backend-config=role_arn=arn:aws:iam::99999999:role/my-github-actions-role -upgrade -reconfigure"
-            TF_VAR_assume_role: "my-github-actions-role"
   
         - name: Terraform validate
           id: validate
@@ -50,8 +85,6 @@
           id: plan
           run: terraform plan -no-color
           working-directory: ${{ env.working-directory }}
-          env:
-            TF_VAR_assume_role: "my-github-actions-role"
   
         - name: Plan output
           id: output
@@ -92,5 +125,3 @@
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: terraform apply -auto-approve -input=false
           working-directory: ${{ env.working-directory }}
-          env:
-            TF_VAR_assume_role: "my-github-actions-role"
