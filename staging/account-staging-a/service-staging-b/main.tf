@@ -3,6 +3,6 @@ resource "aws_instance" "example_server" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "terraform test instance service staging-b"
+    Name = "terraform test instance service staging-b test"
   }
 }

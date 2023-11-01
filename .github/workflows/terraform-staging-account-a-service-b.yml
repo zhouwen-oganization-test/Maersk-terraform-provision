@@ -1,13 +1,13 @@
 ---
-  name: "Terraform GitHub Actions Demo for staging account-a service-a"
+  name: "Terraform GitHub Actions Demo for staging account-a service-b"
   
   "on":
     pull_request:
       paths:
-        - staging/account-staging-a/service-staging-a/*
+        - staging/account-staging-a/service-staging-b/*
     push:
       paths:
-        - staging/account-staging-a/service-staging-a/*
+        - staging/account-staging-a/service-staging-b/*
      
   permissions:
     id-token: write # This is required for requesting the JWT
@@ -19,7 +19,7 @@
       name: Terraform deploy
       runs-on: ubuntu-latest
       env:
-        working-directory: staging/account-staging-a/service-staging-a
+        working-directory: staging/account-staging-a/service-staging-b
         TF_WORKSPACE: my-workspace 
       steps:
         - name: Check out code
