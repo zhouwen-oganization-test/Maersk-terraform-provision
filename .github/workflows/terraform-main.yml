@@ -33,9 +33,9 @@
             git diff --name-only HEAD^ HEAD
             echo "========== check paths of changed files =========="
             git diff --name-only HEAD^ HEAD > files.txt
+            echo ${{env.workspaces}}
             while IFS= read -r file
             do
-              echo type(${{env.workspaces}})
               echo $file
               for ws in ${{env.workspaces}}
               do
