@@ -52,7 +52,7 @@
       if: needs.check.outputs.run_job != 'false'
       runs-on: ubuntu-latest
       env:
-        working-directory: needs.check.outputs.run_job
+        working-directory: ${{needs.check.outputs.run_job}}
         TF_WORKSPACE: my-workspace 
       steps:
         - name: Check out code
