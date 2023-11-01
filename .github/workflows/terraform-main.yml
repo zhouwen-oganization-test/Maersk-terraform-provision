@@ -14,10 +14,10 @@
       name: Check changed files
       env:
         workspaces: |
-          - staging/account-staging-a/service-staging-a
-          - staging/account-staging-a/service-staging-b
-          - staging/account-staging-b/service-staging-c
-          - staging/account-staging-b/service-staging-d
+          staging/account-staging-a/service-staging-a
+          staging/account-staging-a/service-staging-b
+          staging/account-staging-b/service-staging-c
+          staging/account-staging-b/service-staging-d
       outputs:
         run_job: ${{ steps.check_files.outputs.run_job }}
       runs-on: ubuntu-latest
