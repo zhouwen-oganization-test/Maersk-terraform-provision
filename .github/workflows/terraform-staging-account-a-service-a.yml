@@ -56,14 +56,12 @@
 
         - name: Terraform plan
           id: plan
-          run: |
-            terraform plan -out tfplan
+          run: terraform plan -out tfplan
           working-directory: ${{ env.working-directory }}
 
         - name: Terraform show
           id: show
-          run: |
-            terraform show -no color tfplan
+          run: terraform show -no-color tfplan
           working-directory: ${{ env.working-directory }}
   
         - name: Plan output
