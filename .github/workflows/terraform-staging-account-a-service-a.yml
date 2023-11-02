@@ -6,9 +6,11 @@
     pull_request:
       paths:
         - staging/account-staging-a/service-staging-a/*
+        - terraform-staging-account-a-service-a.yml
     push:
       paths:
         - staging/account-staging-a/service-staging-a/*
+        - terraform-staging-account-a-service-a.yml
      
   permissions:
     id-token: write # This is required for requesting the JWT
@@ -44,11 +46,11 @@
           id: init
           run: |
             git config --local --remove-section http."https://github.com/"
-            git config --global url."https://foo:${GH_TOKEN}@github.com/zhouwen-oganization-test".insteadOf "https://github.com/zhouwen-oganization-test"
+            git config --global url."https://terraform:${GH_TOKEN}@github.com/zhouwen-oganization-test".insteadOf "https://github.com/zhouwen-oganization-test"
             terraform init
           env:
               GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          working-directory: ${{ env.working-directory }}
+          # working-directory: ${{ env.working-directory }}
   
         - name: Terraform validate
           id: validate
@@ -57,12 +59,12 @@
         - name: Terraform plan
           id: plan
           run: terraform plan -out tfplan
-          working-directory: ${{ env.working-directory }}
+          # working-directory: ${{ env.working-directory }}
 
         - name: Terraform show
           id: show
           run: terraform show -no-color tfplan
-          working-directory: ${{ env.working-directory }}
+          # working-directory: ${{ env.working-directory }}
   
         - name: Plan output
           id: output
@@ -102,5 +104,5 @@
           id: apply
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: terraform apply -auto-approve -input=false
-          working-directory: ${{ env.working-directory }}
+          # working-directory: ${{ env.working-directory }}
 
