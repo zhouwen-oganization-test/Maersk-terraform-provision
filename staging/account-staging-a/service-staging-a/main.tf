@@ -1,5 +1,7 @@
 module "ec2_instance" {
-  source  = "git@github.com:bitzhouwen/Maersk-terraform-modules.git//terraform-aws-ec2-instance"
+  source  = "git@github.com:zhouwen-oganization-test/Maersk-terraform-modules.git//terraform-aws-ec2-instance?ref=main"
+  # source  = "git::https://github.com/bitzhouwen/Maersk-terraform-modules.git//terraform-aws-ec2-instance?ref=main"
+  # source  = "git@github.com:bitzhouwen/Maersk-terraform-modules.git//terraform-aws-ec2-instance?ref=main"
 
   name = "staging-a-service-a-prototype-instances"
 
@@ -9,6 +11,6 @@ module "ec2_instance" {
 
   tags = {
     Terraform   = "true"
-    Environment = "dev"
+    Environment = "staging"
   }
 }

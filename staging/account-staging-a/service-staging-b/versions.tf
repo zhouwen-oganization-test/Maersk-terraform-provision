@@ -13,4 +13,11 @@ terraform {
     }
   }
   required_version = ">= 1.5.0"
+
+  backend "s3" {
+    key            = "staging/account-staging-a/service-staging-b.tfstate"
+    bucket         = "maersk-remote-tfstate-poc"
+    dynamodb_table = "maersk-remote-state-lock"
+    region         = "ap-southeast-1"
+  }
 }
