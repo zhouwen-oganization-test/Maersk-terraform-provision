@@ -44,7 +44,7 @@
           id: init
           run: |
             git config --local --remove-section http."https://github.com/"
-            git config --global url."https://foo:${GH_TOKEN}@github.com/your-org".insteadOf "https://github.com/your-org"
+            git config --global url."https://foo:${GH_TOKEN}@github.com/zhouwen-oganization-test".insteadOf "https://github.com/zhouwen-oganization-test"
             terraform init
           env:
               GH_TOKEN: ${{ secrets.GH_TOKEN }}
