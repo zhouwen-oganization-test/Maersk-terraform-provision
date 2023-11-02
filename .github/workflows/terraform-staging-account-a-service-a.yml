@@ -71,9 +71,9 @@
             github-token: ${{ secrets.GH_TOKEN }}
             script: |
               const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-              ### TF_WORKSPACE 
+              ### working-directory
   
-              \`${process.env.TF_WORKSPACE}\`
+              \`${process.env.working-directory}\`
   
               #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
               #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
