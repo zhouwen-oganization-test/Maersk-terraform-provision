@@ -50,7 +50,7 @@
             terraform init
           env:
               GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          # working-directory: ${{ env.working-directory }}
+          working-directory: ${{ env.working-directory }}
   
         - name: Terraform validate
           id: validate
@@ -59,12 +59,12 @@
         - name: Terraform plan
           id: plan
           run: terraform plan -out tfplan
-          # working-directory: ${{ env.working-directory }}
+          working-directory: ${{ env.working-directory }}
 
         - name: Terraform show
           id: show
           run: terraform show -no-color tfplan
-          # working-directory: ${{ env.working-directory }}
+          working-directory: ${{ env.working-directory }}
   
         - name: Plan output
           id: output
@@ -76,9 +76,9 @@
             github-token: ${{ secrets.GH_TOKEN }}
             script: |
               const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-              ### working-directory
+              ### TF_WORKSPACE 
   
-              \`${env.working-directory}\`
+              \`${process.env.TF_WORKSPACE}\`
   
               #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
               #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
@@ -104,5 +104,5 @@
           id: apply
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: terraform apply -auto-approve -input=false
-          # working-directory: ${{ env.working-directory }}
+          working-directory: ${{ env.working-directory }}
 
