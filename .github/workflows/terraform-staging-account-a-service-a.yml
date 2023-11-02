@@ -53,10 +53,12 @@
         - name: Terraform validate
           id: validate
           run: terraform validate
-  
+
         - name: Terraform plan
           id: plan
-          run: terraform plan
+          run: |
+            terraform plan -out tfplan
+            terraform show -no-color tfplan
           working-directory: ${{ env.working-directory }}
   
         - name: Plan output
@@ -69,9 +71,9 @@
             github-token: ${{ secrets.GH_TOKEN }}
             script: |
               const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-              ### Workspace
+              ### working-directory
   
-              \`${process.env.TF_WORKSPACE}\`
+              \`${process.env.working-directory}\`
   
               #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
               #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
