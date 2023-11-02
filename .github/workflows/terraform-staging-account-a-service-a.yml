@@ -58,7 +58,6 @@
           id: plan
           run: |
             terraform plan -out tfplan
-            terraform show -no-color tfplan
           working-directory: ${{ env.working-directory }}
   
         - name: Plan output
@@ -80,7 +79,7 @@
               <details><summary>Show Plan</summary>
   
               \`\`\`hcl
-              ${process.env.PLAN}
+              terraform show -no-color tfplan
               \`\`\`
   
               </details>
