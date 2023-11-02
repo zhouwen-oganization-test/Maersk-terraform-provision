@@ -20,7 +20,7 @@
       runs-on: ubuntu-latest
       env:
         working-directory: staging/account-staging-a/service-staging-a
-        TF_WORKSPACE: my-workspace 
+        TF_WORKSPACE: default 
       steps:
         - name: Check out code
           uses: actions/checkout@v2
@@ -56,9 +56,12 @@
 
         - name: Terraform plan
           id: plan
-          run: |
-            terraform plan -out tfplan
-            terraform show -no-color tfplan
+          run: terraform plan -out tfplan
+          working-directory: ${{ env.working-directory }}
+
+        - name: Terraform show
+          id: show
+          run: terraform show -no-color tfplan
           working-directory: ${{ env.working-directory }}
   
         - name: Plan output
@@ -66,14 +69,14 @@
           uses: actions/github-script@v3
           if: github.event_name == 'pull_request'
           env:
-            PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+            PLAN: "terraform\n${{ steps.show.outputs.stdout }}"
           with:
             github-token: ${{ secrets.GH_TOKEN }}
             script: |
               const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
               ### working-directory
   
-              \`${process.env.working-directory}\`
+              \`${env.working-directory}\`
   
               #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
               #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
