@@ -6,9 +6,11 @@
     pull_request:
       paths:
         - staging/account-staging-a/service-staging-b/*
+        - terraform-staging-account-a-service-b.yml
     push:
       paths:
         - staging/account-staging-a/service-staging-b/*
+        - terraform-staging-account-a-service-b.yml
      
   permissions:
     id-token: write # This is required for requesting the JWT

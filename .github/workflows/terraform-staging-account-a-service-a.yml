@@ -6,9 +6,11 @@
     pull_request:
       paths:
         - staging/account-staging-a/service-staging-a/*
+        - .github/workflows/terraform-staging-account-a-service-a.yml
     push:
       paths:
         - staging/account-staging-a/service-staging-a/*
+        - .github/workflows/terraform-staging-account-a-service-a.yml
      
   permissions:
     id-token: write # This is required for requesting the JWT
@@ -44,7 +46,7 @@
           id: init
           run: |
             git config --local --remove-section http."https://github.com/"
-            git config --global url."https://foo:${GH_TOKEN}@github.com/zhouwen-oganization-test".insteadOf "https://github.com/zhouwen-oganization-test"
+            git config --global url."https://terraform:${GH_TOKEN}@github.com/zhouwen-oganization-test".insteadOf "https://github.com/zhouwen-oganization-test"
             terraform init
           env:
               GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -74,9 +76,9 @@
             github-token: ${{ secrets.GH_TOKEN }}
             script: |
               const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-              ### working-directory
+              ### TF_WORKSPACE 
   
-              \`${env.working-directory}\`
+              \`${process.env.TF_WORKSPACE}\`
   
               #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
               #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
