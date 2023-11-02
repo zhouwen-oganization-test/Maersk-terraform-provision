@@ -1,5 +1,5 @@
 ---
-  name: "Demo for staging account-a service-a"
+  name: "Demo for staging account-a service-b"
   
   "on":
     pull_request:
@@ -50,7 +50,7 @@
   
         - name: Terraform plan
           id: plan
-          run: terraform plan -no-color
+          run: terraform plan 
           working-directory: ${{ env.working-directory }}
   
         - name: Plan output

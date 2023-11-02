@@ -1,7 +1,7 @@
 provider "aws" {
-  region   = "ap-southeast-1"
+  region = "ap-southeast-1"
   assume_role {
-    role_arn    = "arn:aws:iam::129980683758:role/AdminRole"
+    role_arn = "arn:aws:iam::129980683758:role/AdminRole"
   }
 }
 
@@ -13,4 +13,12 @@ terraform {
     }
   }
   required_version = ">= 1.5.0"
+
+  backend "s3" {
+    key            = "staging/account-staging-a/service-staging-a.tfstate"
+    bucket         = "maersk-remote-tfstate-poc"
+    dynamodb_table = "maersk-remote-state-lock"
+    region         = "ap-southeast-1"
+  }
+
 }
