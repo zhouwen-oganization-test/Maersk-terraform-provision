@@ -11,6 +11,6 @@ module "ec2_instance" {
   tags = {
     Terraform   = "true"
     Environment = "staging"
-    TestNo      = "3"
+    TestNo      = "4"
   }
 }
