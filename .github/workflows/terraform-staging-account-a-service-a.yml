@@ -1,7 +1,7 @@
 ---
   name: "Demo for staging account-a service-a"
   
-  "on":
+  on:
     workflow_dispatch:
     pull_request:
       paths:
