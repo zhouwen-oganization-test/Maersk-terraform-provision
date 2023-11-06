@@ -1,5 +1,5 @@
 ---
-  name: "Demo for staging account-a service-b"
+  name: staging account-a service-b workflow
   
   on:
     workflow_dispatch:
