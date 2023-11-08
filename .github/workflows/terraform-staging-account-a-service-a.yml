@@ -17,6 +17,15 @@
     contents: read  # This is required for actions/checkout
     
   jobs:
+    terraform-test:
+      needs: terraform
+      name: Terraform work test
+      environment: non-prod
+      runs-on: ubuntu-latest
+      if: github.event_name == 'pull_request' 
+      steps:
+        - name: test
+          run: echo "hello world!"
     terraform:
       name: Terraform work flow 
       environment: non-prod
