@@ -18,7 +18,7 @@
     
   jobs:
     terraform:
-      name: Terraform work flow 
+      name: Terraform automation work flow 
       environment: non-prod
       runs-on: ubuntu-latest
       env:
