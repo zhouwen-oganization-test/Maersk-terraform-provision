@@ -18,6 +18,7 @@
     
   jobs:
     terraform-test:
+      needs: terraform
       name: Terraform work test
       environment: non-prod
       runs-on: ubuntu-latest
