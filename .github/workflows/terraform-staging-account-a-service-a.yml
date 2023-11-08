@@ -19,6 +19,8 @@
   jobs:
     terraform:
       name: Terraform work flow 
+      environment: 
+        name: prod
       runs-on: ubuntu-latest
       env:
         working-directory: staging/account-staging-a/service-staging-a
