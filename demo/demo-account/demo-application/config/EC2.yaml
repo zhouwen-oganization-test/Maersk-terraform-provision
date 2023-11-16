@@ -1,0 +1,60 @@
+accounts:
+  - account_alias: PRD-APP
+    # efs_filesystems:
+    #   - name: EFS-ZHY-PRD-APP-SHR-GFS
+    #     subnets:
+    #       - SN-BJS-TST-PRT-AP01-AZA
+    #       - SN-BJS-TST-PRT-AP01-AZB
+    #     encrypted: true
+    #     security_groups:
+    #       - SG-ZHY-EFS-ALL
+    #       - SG-ZHY-JUMPHOST-GENERAL-ALL
+    #     backup_enabled: true 
+    #     performance_mode: "generalPurpose" # can NOT be changed after creation
+    #     throughput_mode: "bursting" # can only be changed once per day
+    #     lifecycle_policy:
+    #       - transition_to_ia: "AFTER_14_DAYS"
+    #       - transition_to_primary_storage_class: "AFTER_1_ACCESS"
+    #     access_points:
+    #       - root_directory:
+    #           path: /shared/data
+    #       - root_directory:
+    #           path: /test/data
+    # #         mount_instances: 
+    # #           - name: jumphost1
+    # #             mountpoint: /tmp/test
+    # #           # - name: jumphost2
+    # #           #   mountpoint: /tmp/mnt
+
+    ec2_instances: 
+      - name: ansible-testhost5
+        template: ec2-inst-tmpl-amazonlinux-freetier-redhat
+        ami: ami-076c01b3a779df109
+        subnet: SN-BJS-TST-PRT-AP01-AZA
+        instance_type: t2.small
+        iam_instance_profile: R-SSM
+        volume_groups:
+          - name: ebsa
+            volume_type: gp3
+            size: 40
+        user_data_ssm: true
+        user_data: | 
+          runcmd:
+            - amazon-linux-extras install -y python3.8
+            - yum install -y wheel
+        source_dest_check: false
+        tags:
+          Create_Auto_Alarms: true
+          role: webserver
+
+      - name: jumphost2
+        template: ec2-inst-tmpl-amazonlinux-freetier-redhat
+        subnet: SN-BJS-TST-PRT-AP01-AZA
+        instance_type: t2.small
+        iam_instance_profile: R-SSM
+        root_block_device:
+          volume_type: gp3
+          volume_size: 30
+        source_dest_check: false
+        autogen_tags:
+          - name: suggested-primary
