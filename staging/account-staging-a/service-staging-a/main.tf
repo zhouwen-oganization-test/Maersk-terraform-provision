@@ -1,5 +1,4 @@
 module "ec2_instance" {
-  # source  = "git@github.com:zhouwen-oganization-test/Maersk-terraform-modules.git//terraform-aws-ec2-instance?ref=main"
   source  = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-aws-ec2-instance?ref=main"
 
   name = "staging-a-service-a-prototype-instances"
