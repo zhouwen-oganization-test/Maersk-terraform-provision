@@ -34,12 +34,14 @@ variable "windows_pam_user_password" {
 }
 
 module "tag_defs" {
-  source     = "/Users/zhouwenh/Desktop/maersk/maersk-code/Maersk-org-terraform-modules/terraform-modules-ec2-demo/tag-defs"
+  # source     = "/Users/zhouwenh/Desktop/maersk/maersk-code/Maersk-org-terraform-modules/terraform-modules-ec2-demo/tag-defs"
+  source     = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-modules-ec2-demo/tag-defs?ref=main"
   tag_defs   = try(local.yaml_vars.tag_defs, [])
 }
 
 module "ec2_instances" {
-  source                    = "/Users/zhouwenh/Desktop/maersk/maersk-code/Maersk-org-terraform-modules/terraform-modules-ec2-demo"
+  # source                    = "/Users/zhouwenh/Desktop/maersk/maersk-code/Maersk-org-terraform-modules/terraform-modules-ec2-demo"
+  source                    = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-modules-ec2-demo?ref=main"
   account_config            = local.accounts_config["PRD-APP"]
   templates_config          = local.templates_config
   tag_defs_template         = module.tag_defs.template
