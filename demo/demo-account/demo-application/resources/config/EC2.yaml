@@ -45,7 +45,7 @@ accounts:
         source_dest_check: false
         tags:
           Create_Auto_Alarms: true
-          role: test-14
+          role: test-15
 
       # - name: jumphost2
       #   template: ec2-inst-tmpl-amazonlinux-freetier-redhat
