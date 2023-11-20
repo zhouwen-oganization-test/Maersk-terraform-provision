@@ -16,8 +16,8 @@
     contents: read  # This is required for actions/checkout
     
   jobs:
-    path-filter:
-      name: path-filter 
+    drift-detection:
+      name: drift-detection
       runs-on: ubuntu-latest
       outputs: 
         network: ${{ steps.changes.outputs.network }}
@@ -35,8 +35,8 @@
                 resources:
                   - 'demo/demo-account/demo-application/resources/**'
     terraform-network:
-      needs: path-filter
-      if: ${{ needs.path-filter.outputs.network }} == 'true'
+      needs: drift-detection
+      if: ${{ needs.drift-detection.outputs.network }} == 'true'
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/network
@@ -44,9 +44,9 @@
       secrets: inherit
     terraform-resources:
       needs: 
-        - path-filter
+        - drift-detection
         - terraform-network
-      if: ${{ needs.path-filter.outputs.resources }} == 'true'
+      if: ${{ needs.drift-detection.outputs.resources }} == 'true'
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/resources
