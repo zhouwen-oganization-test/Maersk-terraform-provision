@@ -5,10 +5,12 @@
     pull_request:
       paths:
         - demo/demo-account/demo-application/*
+        - demo/demo-account/demo-application/config/* 
         - .github/workflows/terraform-demo.yml
     push:
       paths:
         - demo/demo-account/demo-application/*
+        - demo/demo-account/demo-application/config/* 
         - .github/workflows/terraform-demo.yml
      
   permissions:
