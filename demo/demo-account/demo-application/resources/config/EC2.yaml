@@ -43,6 +43,8 @@ accounts:
             - amazon-linux-extras install -y python3.8
             - yum install -y wheel
         source_dest_check: false
+        securty_gorups: 
+          - VPC-SGP-TST-C-001
         tags:
           Create_Auto_Alarms: true
           role: test-15
