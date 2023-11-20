@@ -23,7 +23,10 @@
         network: ${{ steps.changes.outputs.network }}
         resources: ${{ steps.changes.outputs.resources }}
       steps:
-        - uses: dorny/paths-filter@v2
+        - name: Check out code
+          uses: actions/checkout@v2
+        - name: Change filter
+          uses: dorny/paths-filter@v2
           id: changes
           with:
              filters: |
