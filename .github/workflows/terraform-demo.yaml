@@ -43,7 +43,9 @@
         environment: non-prod
       secrets: inherit
     terraform-resources:
-      needs: path-filter
+      needs: 
+        - path-filter
+        - terraform-network
       if: needs.path-filter.outputs.resources == true
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
