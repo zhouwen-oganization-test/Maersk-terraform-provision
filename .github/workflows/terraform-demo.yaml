@@ -36,7 +36,7 @@
                   - 'demo/demo-account/demo-application/resources/**'
     terraform-network:
       needs: drift-detection
-      if: ${{ needs.drift-detection.outputs.network == 'true' }}
+      if: always() && ${{ needs.drift-detection.outputs.network == 'true' }}
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/network
