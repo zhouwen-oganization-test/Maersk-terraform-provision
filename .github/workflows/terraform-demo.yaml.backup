@@ -1,16 +1,16 @@
 ---
-  name: staging account-a service-b workflow
+  name: demo demo-account demo-application workflow
   
   on:
     workflow_dispatch:
     pull_request:
       paths:
-        - staging/account-staging-a/service-staging-b/*
-        - .github/workflows/terraform-staging-account-a-service-b.yml
+        - demo/demo-account/demo-application/*
+        - .github/workflows/terraform-demo.yml
     push:
       paths:
-        - staging/account-staging-a/service-staging-b/*
-        - .github/workflows/terraform-staging-account-a-service-b.yml
+        - demo/demo-account/demo-application/*
+        - .github/workflows/terraform-demo.yml
      
   permissions:
     id-token: write # This is required for requesting the JWT
@@ -22,7 +22,7 @@
       environment: non-prod
       runs-on: ubuntu-latest
       env:
-        working-directory: staging/account-staging-a/service-staging-b
+        working-directory: demo/demo-account/demo-application
         TF_WORKSPACE: default 
       steps:
         - name: Check out code
@@ -64,6 +64,7 @@
 
         - name: Terraform show
           id: show
+          if: github.event_name == 'pull_request'
           run: terraform show -no-color tfplan
           working-directory: ${{ env.working-directory }}
   
@@ -103,4 +104,3 @@
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
           run: terraform apply -auto-approve -input=false
           working-directory: ${{ env.working-directory }}
-

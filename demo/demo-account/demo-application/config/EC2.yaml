@@ -3,8 +3,8 @@ accounts:
     # efs_filesystems:
     #   - name: EFS-ZHY-PRD-APP-SHR-GFS
     #     subnets:
-    #       - SN-BJS-TST-PRT-AP01-AZA
-    #       - SN-BJS-TST-PRT-AP01-AZB
+    #       - SN-SGP-TST-PRT-AP01-AZA
+    #       - SN-SGP-TST-PRT-AP01-AZB
     #     encrypted: true
     #     security_groups:
     #       - SG-ZHY-EFS-ALL
@@ -30,7 +30,7 @@ accounts:
       - name: ansible-testhost5
         template: ec2-inst-tmpl-amazonlinux-freetier-redhat
         ami: ami-076c01b3a779df109
-        subnet: SN-BJS-TST-PRT-AP01-AZA
+        subnet: SN-SGP-TST-PRT-AP01-AZA
         instance_type: t2.small
         iam_instance_profile: R-SSM
         volume_groups:
@@ -47,14 +47,14 @@ accounts:
           Create_Auto_Alarms: true
           role: webserver
 
-      - name: jumphost2
-        template: ec2-inst-tmpl-amazonlinux-freetier-redhat
-        subnet: SN-BJS-TST-PRT-AP01-AZA
-        instance_type: t2.small
-        iam_instance_profile: R-SSM
-        root_block_device:
-          volume_type: gp3
-          volume_size: 30
-        source_dest_check: false
-        autogen_tags:
-          - name: suggested-primary
+      # - name: jumphost2
+      #   template: ec2-inst-tmpl-amazonlinux-freetier-redhat
+      #   subnet: SN-SGP-TST-PRT-AP01-AZA
+      #   instance_type: t2.small
+      #   iam_instance_profile: R-SSM
+      #   root_block_device:
+      #     volume_type: gp3
+      #     volume_size: 30
+      #   source_dest_check: false
+      #   autogen_tags:
+      #     - name: suggested-primary
