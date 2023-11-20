@@ -47,7 +47,7 @@ accounts:
         source_dest_check: false
         tags:
           Create_Auto_Alarms: true
-          role: jiawei-victory 
+          role: jiawei-victory-2 
 
       # - name: jumphost2
       #   template: ec2-inst-tmpl-amazonlinux-freetier-redhat
