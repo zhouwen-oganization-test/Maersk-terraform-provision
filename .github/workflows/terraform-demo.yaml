@@ -19,7 +19,9 @@
     path-filter:
       name: path-filter 
       runs-on: ubuntu-latest
-      if: github.event.pull_request.merged == true
+      outputs: 
+        network: ${{ steps.changes.outputs.network }}
+        resources: ${{ steps.changes.outputs.resources }}
       steps:
         - uses: dorny/paths-filter@v2
           id: changes
@@ -31,7 +33,7 @@
                   - 'demo/demo-account/demo-application/*'
     terraform-network:
       needs: path-filter
-      if: needs.path-filter.outputs.network == 'true'
+      if: needs.path-filter.outputs.network == true
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/network
@@ -39,7 +41,7 @@
       secrets: inherit
     terraform-resources:
       needs: path-filter
-      if: needs.path-filter.outputs.resources == 'true'
+      if: needs.path-filter.outputs.resources == true
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/
