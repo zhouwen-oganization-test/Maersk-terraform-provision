@@ -1,0 +1,24 @@
+---
+  name: demo demo-account demo-application workflow
+  
+  on:
+    workflow_dispatch:
+    pull_request:
+      paths:
+        - demo/demo-account/demo-application/*
+        - .github/workflows/terraform-demo.yml
+    push:
+      paths:
+        - demo/demo-account/demo-application/*
+        - .github/workflows/terraform-demo.yml
+     
+  permissions:
+    id-token: write # This is required for requesting the JWT
+    contents: read  # This is required for actions/checkout
+    
+  jobs:
+    call-workflow-passing-data:
+      uses: ./.github/workflows/workflow-modules/terraform-workflow.yaml@main
+      with:
+        path: demo/demo-account/demo-application/
+        environment: non-prod

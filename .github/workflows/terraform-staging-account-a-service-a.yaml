@@ -6,11 +6,11 @@
     pull_request:
       paths:
         - staging/account-staging-a/service-staging-a/*
-        - .github/workflows/terraform-staging-account-a-service-a.yml
+        - .github/workflows/terraform-staging-account-a-service-a.yaml
     push:
       paths:
         - staging/account-staging-a/service-staging-a/*
-        - .github/workflows/terraform-staging-account-a-service-a.yml
+        - .github/workflows/terraform-staging-account-a-service-a.yaml
      
   permissions:
     id-token: write # This is required for requesting the JWT
