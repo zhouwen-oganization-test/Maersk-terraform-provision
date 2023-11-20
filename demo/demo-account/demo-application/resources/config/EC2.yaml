@@ -31,6 +31,8 @@ accounts:
         template: ec2-inst-tmpl-amazonlinux-freetier-redhat
         ami: ami-0896ef7bec0d0e792
         subnet: SN-SGP-TST-PRT-AP01-AZA
+        security_groups:
+          - default
         instance_type: t2.small
         iam_instance_profile: EC2-test-role 
         volume_groups:
