@@ -33,7 +33,7 @@
                 network:
                   - 'demo/demo-account/demo-application/network/**'
                 resources:
-                  - 'demo/demo-account/demo-application/*'
+                  - 'demo/demo-account/demo-application/resources/**'
     terraform-network:
       needs: path-filter
       if: ${{ needs.path-filter.outputs.network }} == 'true'
@@ -49,6 +49,6 @@
       if: ${{ needs.path-filter.outputs.resources }} == 'true'
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
-        path: demo/demo-account/demo-application/
+        path: demo/demo-account/demo-application/resources
         environment: non-prod
       secrets: inherit
