@@ -4,13 +4,11 @@
     workflow_dispatch:
     pull_request:
       paths:
-        - demo/demo-account/demo-application/*
-        - demo/demo-account/demo-application/config/* 
+        - demo/demo-account/demo-application/**
         - .github/workflows/terraform-demo.yml
     push:
       paths:
-        - demo/demo-account/demo-application/*
-        - demo/demo-account/demo-application/config/* 
+        - demo/demo-account/demo-application/**
         - .github/workflows/terraform-demo.yml
      
   permissions:
@@ -18,8 +16,31 @@
     contents: read  # This is required for actions/checkout
     
   jobs:
-    call-workflow-passing-data:
-      uses: ./.github/workflows/terraform-workflow.yaml
+    path-filter:
+      name: path-filter 
+      runs-on: ubuntu-latest
+      if: github.event.pull_request.merged == true
+      steps:
+        - uses: dorny/paths-filter@v2
+          id: changes
+          with:
+             filters: |
+                network:
+                  - 'demo/demo-account/demo-application/network/**'
+                resources:
+                  - 'demo/demo-account/demo-application/*'
+    terraform-network:
+      needs: path-filter
+      if: needs.path-filter.outputs.network == 'true'
+      uses: ./.github/workflows/reusable-terraform-workflow.yaml
+      with:
+        path: demo/demo-account/demo-application/network
+        environment: non-prod
+      secrets: inherit
+    terraform-resources:
+      needs: path-filter
+      if: needs.path-filter.outputs.resources == 'true'
+      uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/
         environment: non-prod
