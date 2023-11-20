@@ -20,14 +20,14 @@
       name: drift-detection
       runs-on: ubuntu-latest
       outputs: 
-        network: ${{ steps.changes.outputs.network }}
-        resources: ${{ steps.changes.outputs.resources }}
+        network: ${{ steps.filter.outputs.network }}
+        resources: ${{ steps.filter.outputs.resources }}
       steps:
         - name: Check out code
           uses: actions/checkout@v3
         - name: Change filter
           uses: dorny/paths-filter@v2
-          id: changes
+          id: filter
           with:
              filters: |
                 network:
