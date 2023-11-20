@@ -16,8 +16,8 @@
     contents: read  # This is required for actions/checkout
     
   jobs:
-    drift-detection:
-      name: drift-detection
+    preparation:
+      name: preparation
       runs-on: ubuntu-latest
       outputs: 
         network: ${{ steps.filter.outputs.network }}
@@ -34,19 +34,19 @@
                   - 'demo/demo-account/demo-application/network/**'
                 resources:
                   - 'demo/demo-account/demo-application/resources/**'
-    terraform-network:
-      needs: drift-detection
-      if: ${{ always() && needs.drift-detection.outputs.network == 'true' }}
+    network:
+      needs: preparation
+      if: ${{ always() && needs.preparation.outputs.network == 'true' }}
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/network
         environment: non-prod
       secrets: inherit
-    terraform-resources:
+    resources:
       needs: 
-        - drift-detection
-        - terraform-network
-      if: ${{ always() && needs.drift-detection.outputs.resources == 'true' }}
+        - preparation
+        - network
+      if: ${{ always() && needs.preparation.outputs.resources == 'true' }}
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/resources
