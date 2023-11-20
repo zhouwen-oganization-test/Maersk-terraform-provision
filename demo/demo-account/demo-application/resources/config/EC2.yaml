@@ -31,6 +31,8 @@ accounts:
         template: ec2-inst-tmpl-amazonlinux-freetier-redhat
         ami: ami-0896ef7bec0d0e792
         subnet: SN-SGP-TST-PRT-AP01-AZA
+        security_gorups: 
+          - VPC-SGP-TST-C-001
         instance_type: t2.small
         iam_instance_profile: EC2-test-role 
         volume_groups:
@@ -43,8 +45,6 @@ accounts:
             - amazon-linux-extras install -y python3.8
             - yum install -y wheel
         source_dest_check: false
-        securty_gorups: 
-          - VPC-SGP-TST-C-001
         tags:
           Create_Auto_Alarms: true
           role: test-15
