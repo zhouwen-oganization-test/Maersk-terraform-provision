@@ -23,3 +23,4 @@
       with:
         path: demo/demo-account/demo-application/
         environment: non-prod
+      secrets: inherit
