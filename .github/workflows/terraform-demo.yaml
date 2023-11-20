@@ -1,6 +1,5 @@
 ---
-  name: demo demo-account demo-application workflow
-  
+  name: demo workflow
   on:
     workflow_dispatch:
     pull_request:
@@ -18,7 +17,7 @@
     
   jobs:
     call-workflow-passing-data:
-      uses: ./.github/workflows/workflow-modules/terraform-workflow.yaml@main
+      uses: ./.github/workflows/workflow-modules/terraform-workflow.yaml
       with:
         path: demo/demo-account/demo-application/
         environment: non-prod
