@@ -26,28 +26,28 @@ accounts:
     # #           # - name: jumphost2
     # #           #   mountpoint: /tmp/mnt
 
-    ec2_instances: []
-      # - name: ansible-testhost5
-      #   template: ec2-inst-tmpl-amazonlinux-freetier-redhat
-      #   ami: ami-0896ef7bec0d0e792
-      #   subnet: SN-SGP-TST-PRT-AP01-AZA
-      #   security_groups:
-      #     - default
-      #   instance_type: t2.small
-      #   iam_instance_profile: EC2-test-role 
-      #   volume_groups:
-      #     - name: ebsa
-      #       volume_type: gp3
-      #       size: 40
-      #   user_data_ssm: true
-      #   user_data: | 
-      #     runcmd:
-      #       - amazon-linux-extras install -y python3.8
-      #       - yum install -y wheel
-      #   source_dest_check: false
-      #   tags:
-      #     Create_Auto_Alarms: true
-      #     role: test-role 
+    ec2_instances: 
+      - name: ansible-testhost5
+        template: ec2-inst-tmpl-amazonlinux-freetier-redhat
+        ami: ami-0896ef7bec0d0e792
+        subnet: SN-SGP-TST-PRT-AP01-AZA
+        security_groups:
+          - default
+        instance_type: t2.small
+        iam_instance_profile: EC2-test-role 
+        volume_groups:
+          - name: ebsa
+            volume_type: gp3
+            size: 40
+        user_data_ssm: true
+        user_data: | 
+          runcmd:
+            - amazon-linux-extras install -y python3.8
+            - yum install -y wheel
+        source_dest_check: false
+        tags:
+          Create_Auto_Alarms: true
+          role: binigbing 
 
       # - name: jumphost2
       #   template: ec2-inst-tmpl-amazonlinux-freetier-redhat
