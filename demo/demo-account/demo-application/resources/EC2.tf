@@ -3,22 +3,7 @@ locals {
   yaml_vars = yamldecode(file("${path.module}/${local.config_name}"))
 }
 
-# locals {
-#   region        = try(local.yaml_vars.global.region, "")
-#   tags          = merge({
-#     "TerraformManaged" = true
-#   },
-#   can(local.yaml_vars.global.project_name) ?
-#    { "Project" = local.yaml_vars.global.project_name } : {},
-#    try(local.yaml_vars.global.tags, {})
-#   )
-# }
-
 locals {
-#   organization_access_role_name = local.yaml_vars.global.organization_access_role_name
-#   account_alias_role_arn_map = {
-#     for k, v in data.terraform_remote_state.org.outputs.account_alias_id_map : k => "arn:${data.aws_partition.this.partition}:iam::${v}:role/${local.organization_access_role_name}"
-#   }
 
   accounts_config = { for a in local.yaml_vars.accounts : a.account_alias => a }
 
