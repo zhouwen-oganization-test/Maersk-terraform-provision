@@ -1,7 +1,7 @@
 locals {
   config_name = "config/EC2.yaml"
   account_config = yamldecode(file("${path.module}/${local.config_name}"))
-  templates_config = { for t in try(local.yaml_vars.templates, []) : t.name => t }
+  templates_config = { for t in try(local.account_config.templates, []) : t.name => t }
 }
 
 data "aws_partition" "this" {}
