@@ -5,7 +5,8 @@ locals {
 
 locals {
 
-  accounts_config = { for a in local.yaml_vars.accounts : a.account_alias => a }
+  # accounts_config = { for a in local.yaml_vars.accounts : a.account_alias => a }
+  account_config  = local.yaml_vars
 
   templates_config = { for t in try(local.yaml_vars.templates, []) : t.name => t }
 }
@@ -27,7 +28,7 @@ module "tag_defs" {
 module "ec2_instances" {
   # source                    = "/Users/zhouwenh/Desktop/maersk/maersk-code/Maersk-org-terraform-modules/terraform-modules-ec2-demo"
   source                    = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-modules-ec2-demo?ref=main"
-  account_config            = local.accounts_config["PRD-APP"]
+  account_config            = local.account_config
   templates_config          = local.templates_config
   tag_defs_template         = module.tag_defs.template
 #   account_alias_id_map      = data.terraform_remote_state.org.outputs.account_alias_id_map
