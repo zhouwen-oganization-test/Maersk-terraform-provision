@@ -8,6 +8,9 @@ ec2_instances:
       - default
     instance_type: t2.small
     iam_instance_profile: EC2-test-role 
+    root_block_device:
+      volume_type: gp3
+      volume_size: 30
     volume_groups:
       - name: ebsa
         volume_type: gp3
