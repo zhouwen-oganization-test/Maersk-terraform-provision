@@ -1,0 +1,6 @@
+ebs_volumes: 
+  - name: ansible-testhost5
+    volumes:
+      - name: sdf 
+        type: gp3
+        size: 40
