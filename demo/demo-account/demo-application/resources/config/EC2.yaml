@@ -19,7 +19,7 @@ ec2_instances:
     source_dest_check: false
     tags:
       Create_Auto_Alarms: true
-      role: binigbing eat cookies
+      role: cat eat cookies
   # - name: jumphost2
   #   template: ec2-inst-tmpl-amazonlinux-freetier-redhat
   #   subnet: SN-SGP-TST-PRT-AP01-AZA
