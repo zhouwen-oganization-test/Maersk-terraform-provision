@@ -13,7 +13,7 @@ ec2_instances:
       volume_size: 15
     volume_groups:
       - name: ebsa
-        volume_type: gp3
+        type: gp3
         size: 40
     user_data_ssm: true
     user_data: | 
