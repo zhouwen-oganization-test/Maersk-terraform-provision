@@ -10,7 +10,7 @@ ec2_instances:
     iam_instance_profile: EC2-test-role 
     root_block_device:
       volume_type: gp3
-      volume_size: 30
+      volume_size: 10 
     volume_groups:
       - name: ebsa
         volume_type: gp3
