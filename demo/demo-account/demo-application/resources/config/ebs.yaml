@@ -1,6 +1,14 @@
+# ebs_volumes: 
+#   - name: ansible-testhost5
+#     volumes:
+#       - name: sdf 
+#         type: gp3
+#         size: 40
 ebs_volumes: 
-  - name: ansible-testhost5
-    volumes:
-      - name: sdf 
-        type: gp3
-        size: 40
+  - name: ansible-testhost5/sdg
+    availability_zone: cn-north-1
+    type: gp3
+    size: 40
+    attachment:
+      instance_name: ansible-testhost5
+      device_name: sdg

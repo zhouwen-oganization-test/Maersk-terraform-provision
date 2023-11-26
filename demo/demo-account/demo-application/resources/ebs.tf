@@ -14,6 +14,6 @@ module "ebs_volumes" {
   source                    = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-modules-ebs?ref=main"
   instance_config           = local.instance_config
   templates_config          = local.templates_config
-  account_alias_id_map      = {}
-  windows_pam_user_password = var.windows_pam_user_password
+  # account_alias_id_map      = {}
+  # windows_pam_user_password = var.windows_pam_user_password
 }
