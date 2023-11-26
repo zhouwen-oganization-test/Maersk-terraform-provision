@@ -1,9 +1,3 @@
-# ebs_volumes: 
-#   - name: ansible-testhost5
-#     volumes:
-#       - name: sdf 
-#         type: gp3
-#         size: 40
 ebs_volumes: 
   - name: ansible-testhost5/sdg
     availability_zone: ap-southeast-1a
