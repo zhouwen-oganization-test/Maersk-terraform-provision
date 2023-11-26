@@ -1,6 +1,6 @@
 locals {
   ebs_config_name      = "config/ebs.yaml"
-  ebs_instance_config  = yamldecode(file("${path.module}/${local.config_name}"))
+  ebs_instance_config  = yamldecode(file("${path.module}/${local.ebs_config_name}"))
   ebs_templates_config = { for t in try(local.instance_config.templates, []) : t.name => t }
 }
 
