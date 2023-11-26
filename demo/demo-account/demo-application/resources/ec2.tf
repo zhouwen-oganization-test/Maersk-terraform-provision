@@ -4,9 +4,9 @@ locals {
   templates_config = { for t in try(local.instance_config.templates, []) : t.name => t }
 }
 
-data "aws_partition" "this" {}
-data "aws_caller_identity" "this" {}
-data "aws_region" "this" {}
+# data "aws_partition" "this" {}
+# data "aws_caller_identity" "this" {}
+# data "aws_region" "this" {}
 
 variable "windows_pam_user_password" {
   default = "RotateMe"
