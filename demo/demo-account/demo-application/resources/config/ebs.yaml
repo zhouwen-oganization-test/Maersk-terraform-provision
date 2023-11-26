@@ -6,7 +6,7 @@
 #         size: 40
 ebs_volumes: 
   - name: ansible-testhost5/sdg
-    availability_zone: ap-southeast-1
+    availability_zone: ap-southeast-1a
     type: gp3
     size: 40
     attachment:
