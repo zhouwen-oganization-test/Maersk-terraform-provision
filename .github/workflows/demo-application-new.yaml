@@ -22,7 +22,7 @@
       outputs: 
         network: ${{ steps.filter.outputs.network }}
         resources: ${{ steps.filter.outputs.resources }}
-        change: ${{ steps.filter.output.change }}
+        changes: ${{ steps.filter.output.changes }}
       steps:
         - name: Check out code
           uses: actions/checkout@v3
@@ -41,7 +41,7 @@
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       strategy:
         matrix: 
-          subdirectories: ${{ needs.preparation.outputs.change }}
+          subdirectories: ${{ needs.preparation.outputs.changes }}
         max-parallel: 1
       with:
         path: demo/demo-account/demo-application/${{ matrix.subdirectories }}
