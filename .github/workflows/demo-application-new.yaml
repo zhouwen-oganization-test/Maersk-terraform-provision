@@ -41,7 +41,7 @@
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       strategy:
         matrix: 
-          subdirectories: ${{ needs.preparation.outputs.changes }}
+          subdirectories: ${{ fromJson(needs.preparation.outputs.changes) }}
         max-parallel: 1
       with:
         path: demo/demo-account/demo-application/${{ matrix.subdirectories }}
