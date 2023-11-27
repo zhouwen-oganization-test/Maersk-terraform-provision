@@ -9,5 +9,4 @@ module "ebs_volumes" {
   source                    = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-modules-ebs?ref=main"
   instance_config           = local.ebs_config
   templates_config          = local.ebs_templates_config
-  depends_on = [module.ec2_instances]
 }
