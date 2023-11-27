@@ -1,3 +1,11 @@
+aws_ip_ranges:
+  excluding_services:
+  - EC2
+  - S3
+  - DYNAMODB
+  request_headers:
+    Accept: application/json
+  request_url: https://ip-ranges.amazonaws.com/ip-ranges.json
 security_groups:
   - name: test-sg-02
     vpc: VPC-SGP-TST-C-001
