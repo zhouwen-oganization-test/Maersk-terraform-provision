@@ -1,0 +1,62 @@
+aws_ip_ranges:
+  excluding_services:
+    - EC2
+    - S3
+    - DYNAMODB
+  request_headers:
+    Accept: application/json
+  request_url: https://ip-ranges.amazonaws.com/ip-ranges.json
+
+cidr_block_groups:
+  - cidr_blocks:
+      - 0.0.0.0/0
+    name: anywhere
+
+rules:
+  - description: Allow jumphost ssh
+    from_port: 22
+    name: ssh
+    protocol: tcp
+    to_port: 22
+  - description: Allow jumphost rdp
+    from_port: 3389
+    name: rdp
+    protocol: tcp
+    to_port: 3389
+  - description: Allow intra ping
+    from_port: -1
+    name: ICMP
+    protocol: icmp
+    to_port: -1
+  - description: Allow MYSQL/Aurora
+    from_port: 3306
+    name: MYSQL/Aurora
+    protocol: tcp
+    to_port: 3306
+  - description: Allow PostgreSQL
+    from_port: 5432
+    name: PostgreSQL
+    protocol: tcp
+    to_port: 5432
+
+rule_groups:
+  - name: jumphost-sg
+    rules:
+      - ssh
+      - rdp
+
+security_groups: []
+  # - name: test-sg-01
+  #   vpc: VPC-SGP-TST-C-001
+  #   ingress:
+  #     - name: allow-inbound
+  #       mode: cidr
+  #       source:
+  #         - "0.0.0.0"
+  #       rules:
+  #         - ssh-tcp
+  #   egress:
+  #     - name: allow-outbound
+  #       target: anywhere
+  #       rules:
+  #         - all-all

@@ -1,0 +1,45 @@
+---
+  name: demo workflow 
+  on:
+    workflow_dispatch:
+    pull_request:
+      paths:
+        - demo/demo-account/network/**
+    push:
+      paths:
+        - demo/demo-account/network/**
+     
+  permissions:
+    id-token: write # This is required for requesting the JWT
+    contents: read  # This is required for actions/checkout
+    
+  jobs:
+    preparation:
+      name: preparation
+      runs-on: ubuntu-latest
+      outputs: 
+        changes: ${{ steps.filter.outputs.changes }}
+      steps:
+        - name: Check out code
+          uses: actions/checkout@v3
+        - name: Change filter
+          uses: dorny/paths-filter@v2
+          id: filter
+          with:
+             filters: |
+                vpc:
+                  - 'demo/demo-account/demo-application/vpc/**'
+                security-group:
+                  - 'demo/demo-account/demo-application/security-group/**'
+
+    stage:
+      needs: preparation
+      uses: ./.github/workflows/reusable-terraform-workflow.yaml
+      strategy:
+        matrix: 
+          subdirectories: ${{ fromJson(needs.preparation.outputs.changes) }}
+        max-parallel: 1
+      with:
+        path: demo/demo-account/demo-application/${{ matrix.subdirectories }}
+        environment: non-prod
+      secrets: inherit

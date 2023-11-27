@@ -5,11 +5,9 @@
     pull_request:
       paths:
         - demo/demo-account/demo-application/**
-        - .github/workflows/terraform-demo.yml
     push:
       paths:
         - demo/demo-account/demo-application/**
-        - .github/workflows/terraform-demo.yml
      
   permissions:
     id-token: write # This is required for requesting the JWT
@@ -29,10 +27,10 @@
           id: filter
           with:
              filters: |
-                network:
-                  - 'demo/demo-account/demo-application/network/**'
-                resources:
-                  - 'demo/demo-account/demo-application/resources/**'
+                ec2:
+                  - 'demo/demo-account/demo-application/ec2/**'
+                ebs:
+                  - 'demo/demo-account/demo-application/ebs/**'
 
     stage:
       needs: preparation

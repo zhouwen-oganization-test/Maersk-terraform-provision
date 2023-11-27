@@ -1,0 +1,61 @@
+vpcs: []
+  # - name: VPC-SGP-TST-C-001
+  #   cidr: 172.18.76.0/25
+  #   secondary_cidr_blocks:
+  #     - 172.18.76.128/26
+  #   azs:
+  #     - ap-southeast-1a
+  #     - ap-southeast-1b
+  #   intra_subnets:
+  #     - 172.18.76.0/26
+  #     - 172.18.76.64/26
+  #   intra_subnet_tags:
+  #     - Name: SN-SGP-TST-PRT-AP01-AZA
+  #       kubernetes.io/role/internal-elb: 1
+  #     - Name: SN-SGP-TST-PRT-AP01-AZB
+  #       kubernetes.io/role/internal-elb: 1
+  #   intra_route_table_tags:
+  #     - Name: RTB-SGP-TST-PRT-AP01-ALL
+  #   tgw_subnets:
+  #     - 172.18.76.128/28
+  #     - 172.18.76.144/28
+  #   tgw_subnet_tags:
+  #     - Name: SN-SGP-TST-PRT-TGW-AZA
+  #     - Name: SN-SGP-TST-PRT-TGW-AZB
+  #   tgw_route_table_tags:
+  #     - Name: RTB-SGP-TST-PRT-TGW-ALL
+  #   tgw_dedicated_network_acl: true
+  #   enable_s3_endpoint: true
+  #   enable_dynamodb_endpoint: true
+  #   enable_nat_gateway: false
+  #   enable_dhcp_options: true
+  #   dhcp_options_ntp_servers: [ 169.254.169.123 ]
+  # - name: VPC-SGP-TST-C-002
+  #   cidr: 172.19.76.0/25
+  #   secondary_cidr_blocks:
+  #     - 172.19.76.128/26
+  #   azs:
+  #     - ap-southeast-1a
+  #     - ap-southeast-1b
+  #   intra_subnets:
+  #     - 172.19.76.0/26
+  #     - 172.19.76.64/26
+  #   intra_subnet_tags:
+  #     - Name: SN-SGP-TST-PRT-AP02-AZA
+  #     - Name: SN-SGP-TST-PRT-AP02-AZB
+  #   intra_route_table_tags:
+  #     - Name: RTB-SGP-TST-PRT-AP02-ALL
+  #   tgw_subnets:
+  #     - 172.19.76.128/28
+  #     - 172.19.76.144/28
+  #   tgw_subnet_tags:
+  #     - Name: SN-SGP-TST-02-PRT-TGW-AZA
+  #     - Name: SN-SGP-TST-02-PRT-TGW-AZB
+  #   tgw_route_table_tags:
+  #     - Name: RTB-SGP-TST-02-PRT-TGW-ALL
+  #   tgw_dedicated_network_acl: true
+  #   enable_s3_endpoint: true
+  #   enable_dynamodb_endpoint: true
+  #   enable_nat_gateway: false
+  #   enable_dhcp_options: true
+  #   dhcp_options_ntp_servers: [ 169.254.169.123 ]
