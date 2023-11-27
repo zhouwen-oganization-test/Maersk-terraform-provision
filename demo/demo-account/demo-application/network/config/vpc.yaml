@@ -12,6 +12,7 @@ vpcs:
     intra_subnet_tags:
       - Name: SN-SGP-TST-PRT-AP01-AZA
         kubernetes.io/role/internal-elb: 1
+        test: test
       - Name: SN-SGP-TST-PRT-AP01-AZB
         kubernetes.io/role/internal-elb: 1
     intra_route_table_tags:
