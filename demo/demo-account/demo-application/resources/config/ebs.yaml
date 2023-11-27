@@ -1,4 +1,4 @@
-ebs_volumes: 
+ebs_volumes: [] 
   # - name: ansible-testhost5/sdg
   #   availability_zone: ap-southeast-1a
   #   type: gp3
