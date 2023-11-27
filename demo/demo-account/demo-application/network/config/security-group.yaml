@@ -1,68 +1,49 @@
 aws_ip_ranges:
   excluding_services:
-  - EC2
-  - S3
-  - DYNAMODB
+    - EC2
+    - S3
+    - DYNAMODB
   request_headers:
     Accept: application/json
   request_url: https://ip-ranges.amazonaws.com/ip-ranges.json
 
 cidr_block_groups:
-- cidr_blocks:
-  - 10.197.100.31/32
-  - 10.197.100.143/32
-  name: pam-cidr
-- cidr_blocks:
-  - 10.197.72.0/24
-  name: devops-cidr
-- cidr_blocks:
-  - 10.197.0.0/16
-  name: jlrc-cidr
-- cidr_blocks:
-  - 0.0.0.0/0
-  name: anywhere
+  - cidr_blocks:
+      - 0.0.0.0/0
+    name: anywhere
 
 rules:
-- description: Allow pam/devops to po account jumphost ssh
-  from_port: 22
-  name: ssh
-  protocol: tcp
-  to_port: 22
-- description: Allow pam/devops to po account jumphost rdp
-  from_port: 3389
-  name: rdp
-  protocol: tcp
-  to_port: 3389
-- description: Allow intra ping
-  from_port: -1
-  name: ICMP
-  protocol: icmp
-  to_port: -1
-- description: Allow MYSQL/Aurora
-  from_port: 3306
-  name: MYSQL/Aurora
-  protocol: tcp
-  to_port: 3306
-- description: Allow PostgreSQL
-  from_port: 5432
-  name: PostgreSQL
-  protocol: tcp
-  to_port: 5432
+  - description: Allow jumphost ssh
+    from_port: 22
+    name: ssh
+    protocol: tcp
+    to_port: 22
+  - description: Allow jumphost rdp
+    from_port: 3389
+    name: rdp
+    protocol: tcp
+    to_port: 3389
+  - description: Allow intra ping
+    from_port: -1
+    name: ICMP
+    protocol: icmp
+    to_port: -1
+  - description: Allow MYSQL/Aurora
+    from_port: 3306
+    name: MYSQL/Aurora
+    protocol: tcp
+    to_port: 3306
+  - description: Allow PostgreSQL
+    from_port: 5432
+    name: PostgreSQL
+    protocol: tcp
+    to_port: 5432
 
 rule_groups:
-- name: sap-int
-  rule_name_prefix: sap
-- name: general-jumphost-sg
-  rules:
-  - ssh
-  - rdp
-- name: hacluster
-  rule_name_prefix: pcmk|corosync|csync2
-- name: vpce-sgw
-  rules:
-  - https-443-tcp
-  - vpce-sgw-r1
-  - vpce-sgw-r2
+  - name: jumphost-sg
+    rules:
+      - ssh
+      - rdp
 
 security_groups:
   - name: test-sg-01
@@ -71,11 +52,12 @@ security_groups:
       - name: allow-inbound
         mode: cidr
         source:
-          - "0.0.0.0" 
+          - "0.0.0.0"
         rules:
           - ssh-tcp
+          - jumphost-sg
     egress:
-      - name: allow-outbound 
+      - name: allow-outbound
         target: anywhere
         rules:
           - all-all
