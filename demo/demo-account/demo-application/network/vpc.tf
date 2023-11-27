@@ -9,5 +9,5 @@ module "vpc" {
   vpc_config = try(local.vpc_config, {})
 }
 output "account_vpc_module" {
-  value = local.module.vpcs
+  value = module.vpc
 }

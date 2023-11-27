@@ -10,8 +10,11 @@ vpcs:
       - 172.18.76.0/26
       - 172.18.76.64/26
     intra_subnet_tags:
-      - { Name: SN-SGP-TST-PRT-AP01-AZA, kubernetes.io/role/internal-elb: 1, test: test}
-      - { Name: SN-SGP-TST-PRT-AP01-AZB, kubernetes.io/role/internal-elb: 1}
+      - Name: SN-SGP-TST-PRT-AP01-AZA
+        kubernetes.io/role/internal-elb: 1
+        test: test
+      - Name: SN-SGP-TST-PRT-AP01-AZB
+        kubernetes.io/role/internal-elb: 1
     intra_route_table_tags:
       - Name: RTB-SGP-TST-PRT-AP01-ALL
     tgw_subnets:
