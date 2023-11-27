@@ -20,8 +20,6 @@
       name: preparation
       runs-on: ubuntu-latest
       outputs: 
-        network: ${{ steps.filter.outputs.network }}
-        resources: ${{ steps.filter.outputs.resources }}
         changes: ${{ steps.filter.outputs.changes }}
       steps:
         - name: Check out code
@@ -36,7 +34,7 @@
                 resources:
                   - 'demo/demo-account/demo-application/resources/**'
 
-    terraform:
+    call:
       needs: preparation
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       strategy:
