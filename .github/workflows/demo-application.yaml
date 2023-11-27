@@ -34,7 +34,7 @@
                 resources:
                   - 'demo/demo-account/demo-application/resources/**'
 
-    call:
+    stage:
       needs: preparation
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       strategy:
