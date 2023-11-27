@@ -55,7 +55,6 @@ security_groups:
           - "0.0.0.0"
         rules:
           - ssh-tcp
-          - jumphost-sg
     egress:
       - name: allow-outbound
         target: anywhere
