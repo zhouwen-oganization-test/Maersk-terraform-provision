@@ -1,0 +1,15 @@
+security_groups:
+  - name: SG-ZHY-JUMPHOST-GENERAL-ALL
+    vpc: VPC-ZHY-TST-C-001
+    ingress:
+      - name: allow-inbound
+        mode: cidr
+        source:
+          - "0.0.0.0" 
+        rules:
+          - ssh-tcp
+    egress:
+      - name: allow-outbound 
+        target: anywhere
+        rules:
+          - all-all
