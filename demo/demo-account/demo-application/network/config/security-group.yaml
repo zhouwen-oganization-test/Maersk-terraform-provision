@@ -7,7 +7,7 @@ aws_ip_ranges:
     Accept: application/json
   request_url: https://ip-ranges.amazonaws.com/ip-ranges.json
 security_groups:
-  - name: test-sg-02
+  - name: test-sg-01
     vpc: VPC-SGP-TST-C-001
     ingress:
       - name: allow-inbound
