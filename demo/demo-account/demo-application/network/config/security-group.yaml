@@ -1,6 +1,6 @@
 security_groups:
-  - name: SG-ZHY-JUMPHOST-GENERAL-ALL
-    vpc: VPC-ZHY-TST-C-001
+  - name: test-sg 
+    vpc: VPC-SGP-TST-C-001
     ingress:
       - name: allow-inbound
         mode: cidr
