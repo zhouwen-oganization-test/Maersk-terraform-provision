@@ -1,8 +1,8 @@
 ebs_volumes: 
-  - name: ansible-testhost5/sdg
+  - name: test-host/sdg
     availability_zone: ap-southeast-1a
     type: gp3
     size: 40
     attachment:
-      instance_name: ansible-testhost5
+      instance_name: test-host
       device_name: sdg
