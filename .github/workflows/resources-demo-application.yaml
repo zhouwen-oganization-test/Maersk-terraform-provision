@@ -1,5 +1,7 @@
 ---
   name: resources demo workflow 
+  env:
+    working_path: "demo/demo-account/demo-application"
   on:
     workflow_dispatch:
     pull_request:
@@ -19,6 +21,7 @@
       runs-on: ubuntu-latest
       outputs: 
         changes: ${{ steps.filter.outputs.changes }}
+        working_path: ${{env.working_path}}
       steps:
         - name: Check out code
           uses: actions/checkout@v3
@@ -28,9 +31,9 @@
           with:
              filters: |
                 ec2:
-                  - 'demo/demo-account/demo-application/ec2/**'
+                  - "${{env.working_path}}/ec2/**"
                 ebs:
-                  - 'demo/demo-account/demo-application/ebs/**'
+                  - "${{env.working_path}}/ebs/**"
 
     stage:
       needs: preparation
@@ -40,6 +43,6 @@
           subdirectories: ${{ fromJson(needs.preparation.outputs.changes) }}
         max-parallel: 1
       with:
-        path: demo/demo-account/demo-application/${{ matrix.subdirectories }}
+        path: "${{needs.preparation.outputs.working_path}}/${{ matrix.subdirectories }}"
         environment: non-prod
       secrets: inherit

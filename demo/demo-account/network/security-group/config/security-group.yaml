@@ -46,7 +46,7 @@ rule_groups:
       - rdp
 
 security_groups: 
-  - name: test-sg-01
+  - name: test-sg
     vpc: VPC-SGP-TST-C-001
     ingress:
       - name: allow-inbound
