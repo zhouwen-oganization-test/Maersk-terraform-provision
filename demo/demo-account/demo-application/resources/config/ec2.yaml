@@ -1,25 +1,25 @@
-ec2_instances: 
-  - name: test-host 
-    ami: ami-0896ef7bec0d0e792
-    subnet: SN-SGP-TST-PRT-AP01-AZA
-    ebs_optimized: false
-    security_groups:
-      - default
-    instance_type: t3.micro
-    iam_instance_profile: EC2-test-role 
-    root_block_device:
-      volume_type: gp3
-      volume_size: 10
-    volume_groups:
-      - name: sdf 
-        type: gp3
-        size: 40
-    user_data_ssm: true
-    user_data: | 
-      runcmd:
-        - amazon-linux-extras install -y python3.8
-        - yum install -y wheel
-    source_dest_check: false
-    tags:
-      test-tag: little kitty eat 2 cookies
+ec2_instances: [] 
+  # - name: test-host 
+  #   ami: ami-0896ef7bec0d0e792
+  #   subnet: SN-SGP-TST-PRT-AP01-AZA
+  #   ebs_optimized: false
+  #   security_groups:
+  #     - default
+  #   instance_type: t3.micro
+  #   iam_instance_profile: EC2-test-role 
+  #   root_block_device:
+  #     volume_type: gp3
+  #     volume_size: 10
+  #   volume_groups:
+  #     - name: sdf 
+  #       type: gp3
+  #       size: 40
+  #   user_data_ssm: true
+  #   user_data: | 
+  #     runcmd:
+  #       - amazon-linux-extras install -y python3.8
+  #       - yum install -y wheel
+  #   source_dest_check: false
+  #   tags:
+  #     test-tag: little kitty eat 2 cookies
 
