@@ -1,6 +1,7 @@
 data "aws_partition" "this" {}
 data "aws_caller_identity" "this" {}
 data "aws_region" "this" {}
+
 provider "aws" {
   region = "ap-southeast-1"
   assume_role {
@@ -18,7 +19,7 @@ terraform {
   required_version = ">= 1.5.0"
 
   backend "s3" {
-    key            = "demo/demo-account/demo-application/resources.tfstate"
+    key            = "demo/demo-account/network.tfstate"
     bucket         = "maersk-remote-tfstate-poc"
     dynamodb_table = "maersk-remote-state-lock"
     region         = "ap-southeast-1"

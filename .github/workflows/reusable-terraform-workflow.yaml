@@ -69,7 +69,7 @@
   
         - name: Plan output
           id: output
-          uses: actions/github-script@v3
+          uses: actions/github-script@v4
           if: github.event_name == 'pull_request'
           env:
             PLAN: "terraform\n${{ steps.show.outputs.stdout }}"
