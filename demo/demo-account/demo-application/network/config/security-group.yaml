@@ -1,5 +1,5 @@
 security_groups:
-  - name: test-sg-02 
+  - name: test-sg-01
     vpc: VPC-SGP-TST-C-001
     ingress:
       - name: allow-inbound
