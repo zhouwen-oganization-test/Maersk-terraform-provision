@@ -28,9 +28,9 @@
           with:
              filters: |
                 vpc:
-                  - 'demo/demo-account/demo-application/vpc/**'
+                  - 'demo/demo-account/network/vpc/**'
                 security-group:
-                  - 'demo/demo-account/demo-application/security-group/**'
+                  - 'demo/demo-account/network/security-group/**'
 
     stage:
       needs: preparation
