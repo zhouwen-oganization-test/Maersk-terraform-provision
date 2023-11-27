@@ -13,6 +13,5 @@ module "ec2_instances" {
   source                    = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-modules-ec2?ref=main"
   instance_config           = local.ec2_config
   templates_config          = local.ec2_templates_config
-  # account_alias_id_map      = {}
   windows_pam_user_password = var.windows_pam_user_password
 }
