@@ -60,3 +60,17 @@ security_groups:
         target: anywhere
         rules:
           - all-all
+  - name: test-galvin-01
+    vpc: VPC-SGP-TST-C-001
+    ingress:
+      - name: allow-inbound
+        mode: cidr
+        source:
+          - "0.0.0.0"
+        rules:
+          - rdp-tcp
+    egress:
+      - name: allow-outbound
+        target: anywhere
+        rules:
+          - all-all
