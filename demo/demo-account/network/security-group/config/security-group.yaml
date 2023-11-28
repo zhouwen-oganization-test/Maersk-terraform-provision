@@ -60,7 +60,7 @@ security_groups:
         target: anywhere
         rules:
           - all-all
-  - name: test-galvin-01
+  - name: test-galvin-02
     vpc: VPC-SGP-TST-C-001
     ingress:
       - name: allow-inbound
