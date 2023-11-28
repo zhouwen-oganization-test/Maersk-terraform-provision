@@ -68,7 +68,7 @@ security_groups:
         source:
           - "0.0.0.0"
         rules:
-          - rdp-tcp
+          - rdp
     egress:
       - name: allow-outbound
         target: anywhere
