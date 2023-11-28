@@ -21,7 +21,7 @@
       environment: ${{ inputs.environment }}
       runs-on: ubuntu-latest
       concurrency:
-        group: terraform_concurrency
+        group: ${{ github.head_ref || github.run_id }}
         cancel-in-progress: true
       env:
         working-directory: ${{ inputs.path }}
