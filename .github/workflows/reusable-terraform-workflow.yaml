@@ -20,6 +20,9 @@
       name: terraform 
       environment: ${{ inputs.environment }}
       runs-on: ubuntu-latest
+      concurrency:
+        group: terraform_concurrency
+        cancel-in-progress: true
       env:
         working-directory: ${{ inputs.path }}
         TF_WORKSPACE: default 
