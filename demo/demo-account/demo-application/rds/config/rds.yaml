@@ -20,7 +20,7 @@ rds_instances:
     username: admin 
     create_random_password: false
     manage_master_user_password: true
-    ca_cert_identifier: rds-ca-rsa2048-g1
+    ca_cert_identifier: rds-ca-rsa4096-g1 
     port: "3306"
     apply_immediately: true
     create_replica: false 
