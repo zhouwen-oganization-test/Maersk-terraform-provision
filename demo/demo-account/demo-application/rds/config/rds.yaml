@@ -1,0 +1,53 @@
+rds_instances: 
+  - name: rds-prd-app-1
+    # template: rds-tmpl-mysql8
+    identifier: rds-prd-app-1
+    engine: mysql
+    engine_version: "8.0.32"
+    family: mysql8.0  # DB parameter group
+    major_engine_version: "8.0" # DB option group
+    vpc: VPC-SGP-TST-C-001
+    security_groups:
+      - default 
+      - test-sg
+    subnets: 
+      - SN-SGP-TST-PRT-AP01-AZA
+      - SN-SGP-TST-PRT-AP01-AZB
+    instance_class: db.t3.micro
+    allocated_storage: "20"
+    max_allocated_storage: "200"
+    db_name: testDbTerraform
+    username: admin 
+    create_random_password: false
+    manage_master_user_password: true
+    ca_cert_identifier: rds-ca-rsa2048-g1
+    port: "3306"
+    apply_immediately: true
+    create_replica: false 
+    # replica_config:
+    #   - identifier: rds-prd-app-1-replica
+    #     instance_class: db.t3.micro
+    #   - identifier: rds-prd-app-1-replica2
+    #     instance_class: db.t3.small 
+    #     multi_az: false
+    backup_retention_period: 1
+    skip_final_snapshot: true
+    deletion_protection: false
+    create_db_subnet_group: true
+    create_db_parameter_group: true
+    create_db_option_group: true
+    auto_minor_version_upgrade: false
+    create_kms_key: false 
+    parameters:
+      - name: "character_set_client"
+        value: "utf8mb4"
+      - name: "character_set_server"
+        value: "utf8mb4"
+    # kms_key_alias: "rds/test"
+    # kms_manager_role:
+    #   - R-SRE-ADMIN
+    #   - zhouwen-admin
+    # kms_user_role:
+    #   - R-SRE-ADMIN
+    #   - R-BACKUP-OPER
+    #   - zhouwen-admi
