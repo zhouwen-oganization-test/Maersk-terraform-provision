@@ -34,6 +34,8 @@
                   - "${{env.working_path}}/ec2/**"
                 ebs:
                   - "${{env.working_path}}/ebs/**"
+                rds:
+                  - "${{env.working_path}}/ebs/**"
 
     stage:
       needs: preparation
