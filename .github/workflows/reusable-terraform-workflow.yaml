@@ -20,6 +20,8 @@
       name: terraform 
       environment: ${{ inputs.environment }}
       runs-on: ubuntu-latest
+      concurrency:
+        group: ${{ github.workflow }}
       env:
         working-directory: ${{ inputs.path }}
         TF_WORKSPACE: default 
@@ -101,5 +103,5 @@
         - name: Terraform apply
           id: apply
           if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          run: terraform apply -auto-approve -input=false
+          run: terraform apply -auto-approve tfplan
           working-directory: ${{ env.working-directory }}

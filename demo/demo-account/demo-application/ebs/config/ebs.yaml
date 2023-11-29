@@ -1,4 +1,4 @@
-ebs_volumes:  
+ebs_volumes:
   - name: test-host/sdg
     availability_zone: ap-southeast-1a
     type: gp3
