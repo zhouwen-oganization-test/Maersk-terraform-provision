@@ -5,8 +5,8 @@ locals {
 }
 
 module "rds_instances" {
-  source = "/Users/zhouwenh/Desktop/maersk/maersk-code/Maersk-org-terraform-modules/terraform-modules-rds"
-  # source                    = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-modules-rds?ref=main"
+  # source = "/Users/zhouwenh/Desktop/maersk/maersk-code/Maersk-org-terraform-modules/terraform-modules-rds"
+  source                    = "git::https://github.com/zhouwen-oganization-test/Maersk-org-terraform-modules.git//terraform-modules-rds?ref=main"
   rds_config                = local.rds_config
   templates_config          = local.rds_templates_config
 }
