@@ -59,5 +59,5 @@ lbs:
     attachments:
       - name: tst-ath-0
         target_group_name: prdapp
-        target_id: 172.18.76.62
+        target_id: test-host
         port: 8080
