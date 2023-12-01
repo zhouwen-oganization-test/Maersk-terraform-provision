@@ -18,7 +18,7 @@ terraform {
   required_version = ">= 1.5.0"
 
   backend "s3" {
-    key            = "demo/demo-account/demo-application/rds.tfstate"
+    key            = "demo/demo-account/demo-application/elb.tfstate"
     bucket         = "maersk-remote-tfstate-poc"
     dynamodb_table = "maersk-remote-state-lock"
     region         = "ap-southeast-1"
