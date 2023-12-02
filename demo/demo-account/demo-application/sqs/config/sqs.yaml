@@ -1,0 +1,6 @@
+queues: []
+  # - name: sqs-jiawei-test
+  #   fifo_queue: true
+  #   create_dlq: true
+  #   #dlq_name: sqs-jiawei-test-dlq
+  # - name: sqs-jiawei-test2

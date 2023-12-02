@@ -1,0 +1,14 @@
+topics: []
+  # - name: sns_hk_service_rds_alarm_01
+  #   cw_alarm_enabled: true
+  #   # key alias at sec account
+  #   #kms_master_key_id: arn:aws:kms:ap-east-1:xxxxxxxxxxxx:alias/key_hk_service_000000_rds_alarm_sns
+  #   targets:
+  #     - endpoint: wajiawei+maersk@amazon.com
+  #       protocol: email
+  # - name: sns_hk_service_rds_event_01
+  #   rds_db_event_enabled: true
+  #   #kms_master_key_id: arn:aws:kms:ap-east-1:xxxxxxxxxxxx:alias/key_hk_service_000000_rds_alarm_sns
+  #   targets:
+  #     - endpoint: wajiawei+maersk@amazon.com
+  #       protocol: email
