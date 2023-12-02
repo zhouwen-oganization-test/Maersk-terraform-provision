@@ -1,0 +1,63 @@
+lbs:
+  - name: alb-test
+    load_balancer_type: application
+    internal: true
+    ip_address_type: null
+    vpc: VPC-SGP-TST-C-001
+    security_groups:
+      - default
+    subnet_mapping:
+      - subnet: SN-SGP-TST-PRT-AP01-AZA
+      - subnet: SN-SGP-TST-PRT-AP01-AZB
+    http_tcp_listeners:
+      - port: 8080
+        protocol: HTTP 
+        target_group_name: prdapp
+    http_tcp_listener_rules:
+      - priority: 100
+        http_tcp_listener_port: 8080
+        actions:
+          - type: redirect
+            target_group_name: prdapp
+            port: 80
+            protocol: HTTP
+            status_code: HTTP_301
+        conditions:
+          - path_patterns: ["/static/*"]
+    enable_deletion_protection: false
+    #    access_logs:
+    #      enabled: true
+    #      bucket: <test-lb-accesslog-logging-123456789012>
+    target_groups:
+      # - name: prdapp
+      #   backend_protocol: HTTP
+      #   backend_port: 8080
+      #   target_type: ip
+      #   preserve_client_ip: false
+      #   stickiness:
+      #     type: source_ip
+      #     enabled: true
+      #   connection_termination: false 
+      - name: prdapp 
+        backend_protocol: HTTP
+        backend_port: 8080
+        target_type : instance 
+        preserve_client_ip: false
+        stickiness:
+          type: lb_cookie
+          enabled: true
+        connection_termination: true
+        health_check:
+          protocol: HTTP
+          path: /php/login.php
+          port: 8080 
+          interval: 10
+          healthy_threshold: 3
+          unhealthy_threshold: 3
+          timeout: 5
+          matcher: 200-399
+    attachments:
+      - name: tst-ath-0
+        target_group_name: prdapp
+        target: test-host
+        port: 8080
