@@ -38,6 +38,10 @@
                   - "${{env.working_path}}/rds/**"
                 elb:
                   - "${{env.working_path}}/elb/**"
+                sns:
+                  - "${{env.working_path}}/elb/**"
+                sqs:
+                  - "${{env.working_path}}/elb/**"
 
     stage:
       needs: preparation
