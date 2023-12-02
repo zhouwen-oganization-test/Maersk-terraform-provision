@@ -39,9 +39,9 @@
                 elb:
                   - "${{env.working_path}}/elb/**"
                 sns:
-                  - "${{env.working_path}}/elb/**"
+                  - "${{env.working_path}}/sns/**"
                 sqs:
-                  - "${{env.working_path}}/elb/**"
+                  - "${{env.working_path}}/sqs/**"
 
     stage:
       needs: preparation
