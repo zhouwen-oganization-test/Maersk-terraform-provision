@@ -25,6 +25,7 @@
       env:
         working-directory: ${{ inputs.path }}
         TF_WORKSPACE: default 
+        TF_VAR_fsx_admin_password: ${{ secrets.FSX_ADMIN_PASSWORD }}
       steps:
         - name: Check out code
           uses: actions/checkout@v3
