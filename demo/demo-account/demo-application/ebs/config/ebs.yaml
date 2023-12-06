@@ -4,7 +4,7 @@ ebs_volumes:
     # type: gp3
     # size: 40
     type: io1
-    size: 40
+    size: 50
     iops: 1000
     attachment:
       instance_name: test-host
