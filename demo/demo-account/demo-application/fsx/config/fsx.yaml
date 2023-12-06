@@ -1,0 +1,46 @@
+fsx_instances:
+  - name: fsx-test-instance
+    storage_capacity: 1024 
+    vpc: VPC-SGP-TST-C-001
+    subnets:
+      - SN-SGP-TST-PRT-AP01-AZA
+      - SN-SGP-TST-PRT-AP01-AZB
+    preferred_subnet: SN-SGP-TST-PRT-AP01-AZA
+    deployment_type: "MULTI_AZ_1"
+    throughput_capacity: 128
+    iops: 3072 
+    route_tables:
+      - RTB-SGP-TST-PRT-AP01-ALL
+    security_groups:
+      - default
+    fsx_admin_password: "test12345678"
+    svm_vol_iterator:
+      - svm_name: svm1
+        root_volume_security_style: NTFS
+        tags: null
+        vol_map:
+          - name: vol1
+            junction_path: "/vol1"
+            ontap_volume_type: "RW"
+            security_style: "NTFS"
+            size_in_megabytes: 100
+            storage_efficiency_enabled: true
+            enable_tiering_policy: false
+          - name: vol2
+            junction_path: "/vol2"
+            ontap_volume_type: "RW"
+            security_style: "UNIX"
+            size_in_megabytes: 200
+            storage_efficiency_enabled: true
+            tiering_policy:
+              tiering_policy_name: AUTO
+              cooling_period: 31 
+        # active_directory_configuration: 
+        #   netbios_name: svm1
+        #   self_managed_active_directory_configuration:
+        #     dns_ips: [8.8.8.8]
+        #     domain_name: heyheyhey
+        #     password: "1111"
+        #     username: "admin"
+        #     file_system_administrators_group: "a group"
+        #     organizational_unit_distinguished_name: "idontknow"

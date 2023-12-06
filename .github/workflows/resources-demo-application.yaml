@@ -42,6 +42,8 @@
                   - "${{env.working_path}}/sns/**"
                 sqs:
                   - "${{env.working_path}}/sqs/**"
+                fsx:
+                  - "${{env.working_path}}/fsx/**"
 
     stage:
       needs: preparation
