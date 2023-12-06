@@ -5,7 +5,7 @@ locals {
 
 variable "FSX_ADMIN_PASSWORD" {
   description = "get password from github environment secrets"
-  default = "RotateMe"
+  default = "RotateMe4321"
 }
 
 module "fsx-instances" {
