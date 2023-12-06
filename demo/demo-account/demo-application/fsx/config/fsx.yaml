@@ -13,7 +13,7 @@ fsx_instances:
       - RTB-SGP-TST-PRT-AP01-ALL
     security_groups:
       - default
-    fsx_admin_password: "test12345678"
+    # fsx_admin_password: "test12345678"
     svm_vol_iterator:
       - svm_name: svm1
         root_volume_security_style: NTFS
