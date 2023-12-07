@@ -10,7 +10,6 @@ ec2_instances:
     root_block_device:
       volume_type: io1 
       volume_size: 20
-      iops: 1000
     volume_groups:
       - name: sdf 
         type: io1 
