@@ -49,6 +49,7 @@
       needs: preparation
       uses: ./.github/workflows/reusable-terraform-workflow.yaml
       strategy:
+        fail-fast: false
         matrix: 
           subdirectories: ${{ fromJson(needs.preparation.outputs.changes) }}
         max-parallel: 1
@@ -56,3 +57,4 @@
         path: "${{needs.preparation.outputs.working_path}}/${{ matrix.subdirectories }}"
         environment: non-prod
       secrets: inherit
+      

@@ -8,14 +8,13 @@ ec2_instances:
     instance_type: t3.small
     iam_instance_profile: EC2-test-role 
     root_block_device:
-      volume_type: io1 
+      volume_type: gp3 
       volume_size: 20
-      iops: 1000
     volume_groups:
       - name: sdf 
         type: io1 
         size: 50
-        iops: 1000
+        iops: 1000 
     user_data_ssm: true
     user_data: | 
       runcmd:
