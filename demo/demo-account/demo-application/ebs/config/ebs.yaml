@@ -5,7 +5,7 @@ ebs_volumes:
     size: 40
     # type: io1
     # size: 50
-    iops: 1000
+    # iops: 1000
     attachment:
       instance_name: test-host
       device_name: sdg

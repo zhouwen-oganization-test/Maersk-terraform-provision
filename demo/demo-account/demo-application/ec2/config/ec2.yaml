@@ -14,7 +14,7 @@ ec2_instances:
       - name: sdf 
         type: io1 
         size: 50
-        iops: 1000
+        iops: 2000 
     user_data_ssm: true
     user_data: | 
       runcmd:
