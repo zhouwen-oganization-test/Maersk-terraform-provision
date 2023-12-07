@@ -5,7 +5,7 @@ ec2_instances:
     security_groups:
       - default
       - test-sg
-    instance_type: t3.micro
+    instance_type: t3.small
     iam_instance_profile: EC2-test-role 
     root_block_device:
       volume_type: io1 
