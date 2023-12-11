@@ -44,6 +44,8 @@
                   - "${{env.working_path}}/sqs/**"
                 fsx:
                   - "${{env.working_path}}/fsx/**"
+                opensearch:
+                  - "${{env.working_path}}/opensearch/**"
 
     stage:
       needs: preparation
