@@ -30,7 +30,7 @@ rds_instances:
     #   - identifier: rds-prd-app-1-replica2
     #     instance_class: db.t3.small 
     #     multi_az: false
-    backup_retention_period: 2 
+    backup_retention_period: 1 
     skip_final_snapshot: true
     deletion_protection: false
     create_db_subnet_group: true
