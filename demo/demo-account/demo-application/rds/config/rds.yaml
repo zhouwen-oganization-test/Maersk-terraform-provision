@@ -19,7 +19,7 @@ rds_instances:
     db_name: testDbTerraform
     username: admin 
     create_random_password: false
-    manage_master_user_password: true
+    # manage_master_user_password: true
     ca_cert_identifier: rds-ca-rsa4096-g1 
     port: "3306"
     apply_immediately: true
