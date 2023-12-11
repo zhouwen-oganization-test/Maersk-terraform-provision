@@ -19,7 +19,7 @@ rds_instances:
     db_name: testDbTerraform
     username: admin 
     create_random_password: false
-    manage_master_user_password: true
+    # manage_master_user_password: true
     ca_cert_identifier: rds-ca-rsa4096-g1 
     port: "3306"
     apply_immediately: true
@@ -30,7 +30,7 @@ rds_instances:
     #   - identifier: rds-prd-app-1-replica2
     #     instance_class: db.t3.small 
     #     multi_az: false
-    backup_retention_period: 1
+    backup_retention_period: 1 
     skip_final_snapshot: true
     deletion_protection: false
     create_db_subnet_group: true
