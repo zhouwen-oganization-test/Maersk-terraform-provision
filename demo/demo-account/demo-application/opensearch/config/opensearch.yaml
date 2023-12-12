@@ -1,9 +1,12 @@
-opensearch: []
-  # - domain_name: maersk-opensearch-test
-  #   advanced_security_options_internal_user_database_enabled: true
-  #   master_user_name: galvin-test
-  #   security_group_ids:
-  #     - sg-061727e38f00628f3
-  #   subnet_ids:
-  #     - subnet-05ef56d517ea09416
-  #     - subnet-0874b307cb93c32da
+opensearch: 
+  - domain_name: maersk-opensearch-test
+    advanced_security_options_internal_user_database_enabled: true
+    master_user_name: galvin-test
+    vpc: VPC-SGP-TST-C-002
+    security_groups:
+      - default
+    subnets:
+      - SN-SGP-TST-PRT-AP02-AZB
+      - SN-SGP-TST-PRT-AP02-AZA
+      #- subnet-05ef56d517ea09416
+      #- subnet-0874b307cb93c32da
