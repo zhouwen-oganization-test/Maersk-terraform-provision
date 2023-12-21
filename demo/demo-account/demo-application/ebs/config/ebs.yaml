@@ -16,3 +16,9 @@ ebs_volumes:
     # type: io1
     # size: 50
     iops: 1000
+  - name: test-host/sdh
+    availability_zone: ap-southeast-1a
+    type: gp3
+    size: 8
+    # size: 50
+    # iops: 1000
