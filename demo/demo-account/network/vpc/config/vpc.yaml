@@ -17,15 +17,15 @@ vpcs:
         kubernetes.io/role/internal-elb: 1
     private_route_table_tags:
       - Name: RTB-SGP-TST-PRT-AP01-ALL
-    tgw_subnets:
+    public_subnets:
       - 172.18.76.128/28
       - 172.18.76.144/28
-    tgw_subnet_tags:
-      - Name: SN-SGP-TST-PRT-TGW-AZA
-      - Name: SN-SGP-TST-PRT-TGW-AZB
-    tgw_route_table_tags:
-      - Name: RTB-SGP-TST-PRT-TGW-ALL
-    tgw_dedicated_network_acl: true
+    public_subnet_tags:
+      - Name: SN-SGP-TST-PRT-public-AZA
+      - Name: SN-SGP-TST-PRT-public-AZB
+    public_route_table_tags:
+      - Name: RTB-SGP-TST-PRT-public-ALL
+    public_dedicated_network_acl: true
     enable_s3_endpoint: true
     enable_dynamodb_endpoint: true
     enable_nat_gateway: true 
