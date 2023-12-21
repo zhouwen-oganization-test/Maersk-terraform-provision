@@ -21,7 +21,7 @@
       environment: ${{ inputs.environment }}
       runs-on: ubuntu-latest
       concurrency:
-        group: ${{ github.workflow }}
+        group: ${{ inputs.path }}
       env:
         working-directory: ${{ inputs.path }}
         TF_WORKSPACE: default 
