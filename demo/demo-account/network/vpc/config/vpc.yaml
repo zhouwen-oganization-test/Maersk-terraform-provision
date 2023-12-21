@@ -1,5 +1,5 @@
 vpcs: 
-  - name: VPC-SGP-TST-C-001
+  - name: VPC-SGP-TST-C-1
     cidr: 172.18.76.0/25
     secondary_cidr_blocks:
       - 172.18.76.128/26
