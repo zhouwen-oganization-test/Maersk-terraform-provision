@@ -132,7 +132,7 @@ vpcs:
     public_route_table_tags:
       - Name: Eric-Test-VPC-PUBLIC-RT
  
-    # Endpoint
+    # Endpoints
     endpoints:
       - service: s3
         service_type: Gateway
