@@ -63,9 +63,8 @@ vpcs:
       - Name: Eric-Test-VPC-Private-b
         Account: Lab
         Environment: Sandbox
-    # private_route_table_tags:
-    #   - Name: Eric-Test-VPC-Private-RT-a
-    #   - Name: Eric-Test-VPC-Private-RT-b
+    private_route_table_tags:
+      - Name: Eric-Test-VPC-Private-RT-a
 
     # NAT, private subnets must be integrated with NAT settings
     enable_nat_gateway: true
