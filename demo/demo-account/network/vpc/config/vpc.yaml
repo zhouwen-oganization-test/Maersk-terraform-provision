@@ -113,3 +113,13 @@ vpcs:
     # Public subnets
     public_subnets:
       - 172.17.192.0/19
+      - 172.17.224.0/19
+    public_subnet_tags:
+      - Name: Eric-Test-VPC-Public-a
+        Account: Lab
+        Environment: Sandbox
+      - Name: Eric-Test-VPC-Public-b
+        Account: Lab
+        Environment: Sandbox
+    public_route_table_tags:
+      - Name: Eric-Test-VPC-PUBLIC-RT
