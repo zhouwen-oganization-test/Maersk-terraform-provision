@@ -97,7 +97,7 @@ security_groups:
             to_port: 10051
             description: Allow access to Zabbix servers
   - name: sgZabbixServer
-    vpc: Eric-Test-VPC
+    vpc: Eric-Test-VPC-2
     ingress:
       - name: zabbix-agent-inbound
         mode: sg
