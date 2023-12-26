@@ -31,7 +31,7 @@ s3_buckets:
       - id: noncurrent_version_expiration
         noncurrent_version_expiration:
           - newer_noncurrent_versions: 3
-          - noncurrent_days: 30
+            noncurrent_days: 30
     tiering_configuration:
       - name: Test-tiering
         filter:
