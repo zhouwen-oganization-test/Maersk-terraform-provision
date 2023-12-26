@@ -43,6 +43,11 @@ rules:
     from_port: 10051
     to_port: 10051
     description: Allow access from Zabbix agents
+  - name: from-zabbix-server
+    protocol: tcp
+    from_port: 10050
+    to_port: 10050
+    description: Allow access from Zabbix servers
 
 rule_groups:
   - name: jumphost-sg
@@ -50,7 +55,7 @@ rule_groups:
       - ssh
       - rdp
 
-security_groups:  
+security_groups: [] 
   # - name: test-sg
   #   vpc: VPC-SGP-TST-C-001
   #   ingress:
@@ -87,20 +92,13 @@ security_groups:
   #       source:
   #         - sgZabbixServer
   #       rules:
-  #         - name: from-zabbix-server
-  #           protocol: tcp
-  #           from_port: 10050
-  #           to_port: 10050
-  #           description: Allow access from Zabbix servers
+  #         - from-zabbix-server 
   #   egress:
   #     - name: to-zabbix-server
+  #       mode: sg
   #       target: sgZabbixServer
   #       rules:
-  #         - name: zabbix-agent
-  #           protocol: tcp
-  #           from_port: 10051
-  #           to_port: 10051
-  #           description: Allow access to Zabbix servers
+  #         - zabbix-agent
   # - name: sgZabbixServer
   #   vpc: Eric-Test-VPC-2
   #   ingress:
