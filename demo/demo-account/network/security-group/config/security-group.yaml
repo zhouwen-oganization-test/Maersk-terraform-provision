@@ -101,23 +101,23 @@ security_groups:
   #           from_port: 10051
   #           to_port: 10051
   #           description: Allow access to Zabbix servers
-  - name: sgZabbixServer
-    vpc: Eric-Test-VPC-2
-    ingress:
-      - name: zabbix-agent-inbound
-        mode: sg
-        source: 
-          - sgZabbixServer
-        rules:
-          - zabbix-agent
-      - name: zabbix-ui-access
-        mode: cidr
-        source:
-          - anywhere
-        rules:
-          - https-443-tcp
-    egress:
-      - name: allow-outbound
-        target: anywhere
-        rules:
-          - all-all
+  # - name: sgZabbixServer
+  #   vpc: Eric-Test-VPC-2
+  #   ingress:
+  #     - name: zabbix-agent-inbound
+  #       mode: sg
+  #       source: 
+  #         - sgZabbixServer
+  #       rules:
+  #         - zabbix-agent
+  #     - name: zabbix-ui-access
+  #       mode: cidr
+  #       source:
+  #         - anywhere
+  #       rules:
+  #         - https-443-tcp
+  #   egress:
+  #     - name: allow-outbound
+  #       target: anywhere
+  #       rules:
+  #         - all-all
