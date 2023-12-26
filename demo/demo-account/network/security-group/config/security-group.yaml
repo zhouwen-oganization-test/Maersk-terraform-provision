@@ -56,34 +56,34 @@ rule_groups:
       - rdp
 
 security_groups:  
-  - name: test-sg
-    vpc: VPC-SGP-TST-C-001
-    ingress:
-      - name: allow-inbound
-        mode: cidr
-        source:
-          - "0.0.0.0/0"
-        rules:
-          - ssh
-    egress:
-      - name: allow-outbound
-        target: anywhere
-        rules:
-          - all-all
-  - name: test-galvin-02
-    vpc: VPC-SGP-TST-C-001
-    ingress:
-      - name: allow-inbound
-        mode: cidr
-        source:
-          - "0.0.0.0/0"
-        rules:
-          - rdp
-    egress:
-      - name: allow-outbound
-        target: anywhere
-        rules:
-          - all-all
+  # - name: test-sg
+  #   vpc: VPC-SGP-TST-C-001
+  #   ingress:
+  #     - name: allow-inbound
+  #       mode: cidr
+  #       source:
+  #         - "0.0.0.0/0"
+  #       rules:
+  #         - ssh
+  #   egress:
+  #     - name: allow-outbound
+  #       target: anywhere
+  #       rules:
+  #         - all-all
+  # - name: test-galvin-02
+  #   vpc: VPC-SGP-TST-C-001
+  #   ingress:
+  #     - name: allow-inbound
+  #       mode: cidr
+  #       source:
+  #         - "0.0.0.0/0"
+  #       rules:
+  #         - rdp
+  #   egress:
+  #     - name: allow-outbound
+  #       target: anywhere
+  #       rules:
+  #         - all-all
   - name: sgZabbixAgent
     vpc: Eric-Test-VPC-2
     ingress:
