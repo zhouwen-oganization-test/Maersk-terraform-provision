@@ -106,7 +106,8 @@ security_groups:
     ingress:
       - name: zabbix-agent-inbound
         mode: sg
-        source: sgZabbixServer
+        source: 
+          - sgZabbixServer
         rules:
           - zabbix-agent
       - name: zabbix-ui-access
