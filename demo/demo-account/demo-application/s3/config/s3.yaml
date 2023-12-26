@@ -22,11 +22,11 @@ s3_buckets:
       - id: noncurrent_version_storage_class_transition
         status: Enabled 
         noncurrent_version_transition:
-          - days: 30
+          - days: 60 
             storage_class: STANDARD_IA
-          - days: 60
+          - days: 90
             storage_class: GLACIER
-          - days: 150
+          - days: 120
             storage_class: DEEP_ARCHIVE
       - id: noncurrent_version_expiration
         noncurrent_version_expiration:
