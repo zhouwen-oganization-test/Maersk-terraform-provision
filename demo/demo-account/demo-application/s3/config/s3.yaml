@@ -20,7 +20,7 @@ s3_buckets:
         expiration:
           - days: 365
       - id: noncurrent_version_storage_class_transition
-        status: true
+        status: Enabled 
         noncurrent_version_transition:
           - days: 30
             storage_class: STANDARD_IA
