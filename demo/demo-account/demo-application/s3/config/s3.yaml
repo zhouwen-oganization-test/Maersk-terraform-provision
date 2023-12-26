@@ -4,7 +4,8 @@ s3_buckets:
     lifecycle_rules:
       - id: abort_incomplete_multipart_upload
         enabled: true
-        days_after_initiation: 7
+        abort_incomplete_multipart_upload:
+          days_after_initiation: 7
       - id: storage_class_transition
         enabled: true
         transition:
@@ -16,7 +17,7 @@ s3_buckets:
             storage_class: DEEP_ARCHIVE
       - id: current_version_expiration
         expiration:
-          days: 365
+          - days: 365
       - id: noncurrent_version_storage_class_transition
         noncurrent_version_transition:
           - days: 30
@@ -25,11 +26,10 @@ s3_buckets:
             storage_class: GLACIER
           - days: 150
             storage_class: DEEP_ARCHIVE
-
       - id: noncurrent_version_expiration
         noncurrent_version_expiration:
-          newer_noncurrent_versions: 3
-          noncurrent_days: 30
+          - newer_noncurrent_versions: 3
+          - noncurrent_days: 30
     tiering_configuration:
       - name: Test-tiering
         filter:
