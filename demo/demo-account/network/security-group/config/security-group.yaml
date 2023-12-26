@@ -45,7 +45,7 @@ rule_groups:
       - ssh
       - rdp
 
-security_groups: [] 
+security_groups:  
   # - name: test-sg
   #   vpc: VPC-SGP-TST-C-001
   #   ingress:
@@ -74,3 +74,49 @@ security_groups: []
   #       target: anywhere
   #       rules:
   #         - all-all
+  - name: sgZabbixAgent
+    vpc: Eric-Test-VPC
+    ingress:
+      - name: zabbix-server-inbound
+        mode: sg
+        source:
+          - sgZabbixServer
+        rules:
+          - name: from-zabbix-server
+            protocol: tcp
+            from_port: 10050
+            to_port: 10050
+            description: Allow access from Zabbix servers
+    egress:
+      - name: to-zabbix-server
+        target: sgZabbixServer
+        rules:
+          - name: zabbix-agent
+            protocol: tcp
+            from_port: 10051
+            to_port: 10051
+            description: Allow access to Zabbix servers
+  - name: sgZabbixServer
+    vpc: Eric-Test-VPC
+    ingress:
+      - name: zabbix-agent-inbound
+        mode: sg
+        source:
+          - sgZabbixAgent
+        rules:
+          - name: zabbix-agent
+            protocol: tcp
+            from_port: 10051
+            to_port: 10051
+            description: Allow access from Zabbix agents
+      - name: zabbix-ui-access
+        mode: cidr
+        source:
+          - anywhere
+        rules:
+          - HTTPS
+    egress:
+      - name: allow-outbound
+        target: anywhere
+        rules:
+          - all-all
