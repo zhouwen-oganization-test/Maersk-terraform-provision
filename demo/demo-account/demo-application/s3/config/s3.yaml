@@ -16,9 +16,11 @@ s3_buckets:
           - days: 150
             storage_class: DEEP_ARCHIVE
       - id: current_version_expiration
+        status: true
         expiration:
           - days: 365
       - id: noncurrent_version_storage_class_transition
+        status: true
         noncurrent_version_transition:
           - days: 30
             storage_class: STANDARD_IA
