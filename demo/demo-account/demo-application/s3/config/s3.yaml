@@ -1,0 +1,69 @@
+s3_buckets:  
+  - name: 129980683758-test-bucket-demo
+    enable_versioning: true
+    lifecycle_rules:
+      - id: abort_incomplete_multipart_upload
+        enabled: true
+        abort_incomplete_multipart_upload:
+          days_after_initiation: 7
+      - id: storage_class_transition
+        enabled: true
+        transition:
+          - days: 30
+            storage_class: STANDARD_IA
+          - days: 60
+            storage_class: GLACIER
+          - days: 150
+            storage_class: DEEP_ARCHIVE
+      - id: current_version_expiration
+        status: true
+        expiration:
+          - days: 365
+      - id: noncurrent_version_storage_class_transition
+        status: Enabled 
+        noncurrent_version_transition:
+          - days: 30
+            storage_class: STANDARD_IA
+          - days: 60
+            storage_class: GLACIER
+          - days: 150
+            storage_class: DEEP_ARCHIVE
+      - id: noncurrent_version_expiration
+        noncurrent_version_expiration:
+          - newer_noncurrent_versions: 3
+            noncurrent_days: 30
+    tiering_configuration:
+      - name: Test-tiering
+        filter:
+          prefix: "documents/"
+          tags:
+            priority: high
+            class: blue
+        tiering:
+          - access_tier: "ARCHIVE_ACCESS"
+            days: 125
+          - access_tier: "DEEP_ARCHIVE_ACCESS"
+            days: 180
+    policies:
+      Statement:
+      - Sid: AWSConsoleStmt-1669628968037
+        Effect: Allow
+        Principal:
+          AWS: arn:aws:iam::114774131450:root
+        Action: s3:PutObject
+        Resource: arn:aws:s3:::405435454034-elb/AWSLogs/405435454034/*
+      - Sid: AWSLogDeliveryWrite
+        Effect: Allow
+        Principal:
+          Service: delivery.logs.amazonaws.com
+        Action: s3:PutObject
+        Resource: arn:aws:s3:::405435454034-elb/AWSLogs/405435454034/*
+        Condition:
+          StringEquals:
+            s3:x-amz-acl: bucket-owner-full-control
+      - Sid: AWSLogDeliveryAclCheck
+        Effect: Allow
+        Principal:
+          Service: delivery.logs.amazonaws.com
+        Action: s3:GetBucketAcl
+        Resource: arn:aws:s3:::405435454034-elb
