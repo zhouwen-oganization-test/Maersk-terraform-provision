@@ -44,26 +44,47 @@ s3_buckets:
             days: 125
           - access_tier: "DEEP_ARCHIVE_ACCESS"
             days: 180
+    access_logs:
+      enabled: true
+      target_bucket: 129980683758-test-bucket-demo
+      target_prefix: test
+      target_object_key_format:
+        partitioned_prefix:
+          partition_date_source: DeliveryTime
     policies:
-      Statement:
-      - Sid: AWSConsoleStmt-1669628968037
-        Effect: Allow
-        Principal:
-          AWS: arn:aws:iam::114774131450:root
-        Action: s3:PutObject
-        Resource: arn:aws:s3:::405435454034-elb/AWSLogs/405435454034/*
-      - Sid: AWSLogDeliveryWrite
-        Effect: Allow
-        Principal:
-          Service: delivery.logs.amazonaws.com
-        Action: s3:PutObject
-        Resource: arn:aws:s3:::405435454034-elb/AWSLogs/405435454034/*
-        Condition:
-          StringEquals:
-            s3:x-amz-acl: bucket-owner-full-control
-      - Sid: AWSLogDeliveryAclCheck
-        Effect: Allow
-        Principal:
-          Service: delivery.logs.amazonaws.com
-        Action: s3:GetBucketAcl
-        Resource: arn:aws:s3:::405435454034-elb
+      statement:
+      - sid: AWSConsoleStmt-1669628968037
+        effect: Allow
+        principals:
+          - type: AWS
+            identifiers:
+              - arn:aws:iam::114774131450:root
+        actions: 
+          - s3:PutObject
+        resources: 
+          - arn:aws:s3:::405435454034-elb/AWSLogs/405435454034/*
+      - sid: AWSLogDeliveryWrite
+        effect: Allow
+        principals:
+          - type: Service
+            identifiers:
+              - delivery.logs.amazonaws.com
+        actions: 
+          - s3:PutObject
+        resources: 
+          - arn:aws:s3:::405435454034-elb/AWSLogs/405435454034/*
+        condition:
+          - test: StringEquals
+            variable: s3:x-amz-acl
+            values:
+              - bucket-owner-full-control
+      - sid: AWSLogDeliveryAclCheck
+        effect: Allow
+        principals:
+          - type: Service
+            identifiers:
+              - delivery.logs.amazonaws.com
+        actions: 
+          - s3:GetBucketAcl
+        resources: 
+          - arn:aws:s3:::405435454034-elb
