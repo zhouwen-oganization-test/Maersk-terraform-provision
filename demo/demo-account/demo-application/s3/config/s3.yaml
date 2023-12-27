@@ -65,7 +65,7 @@ s3_buckets:
           - arn:aws:s3:::405435454034-elb/AWSLogs/405435454034/*
       - sid: AWSLogDeliveryWrite
         effect: Allow
-        principal:
+        principals:
           - type: Service
             identifiers:
               - delivery.logs.amazonaws.com
