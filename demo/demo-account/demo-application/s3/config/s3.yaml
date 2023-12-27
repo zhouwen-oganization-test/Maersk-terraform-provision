@@ -2,6 +2,7 @@ s3_buckets:
   - name: 129980683758-test-bucket-demo
     tags:
       test: test
+      test2: test2
     enable_versioning: true
     lifecycle_rules:
       - id: abort_incomplete_multipart_upload
