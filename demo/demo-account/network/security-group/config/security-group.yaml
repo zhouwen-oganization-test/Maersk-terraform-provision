@@ -96,7 +96,8 @@ security_groups:
     egress:
       - name: to-zabbix-server
         mode: sg
-        target: sgZabbixServer
+        target: 
+          - sgZabbixServer
         rules:
           - zabbix-agent
   - name: sgZabbixServer
@@ -116,6 +117,7 @@ security_groups:
           - https-443-tcp
     egress:
       - name: allow-outbound
-        target: anywhere
+        target: 
+          - anywhere
         rules:
           - all-all
