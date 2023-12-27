@@ -62,7 +62,8 @@ s3_buckets:
         actions: 
           - s3:PutObject
         resources: 
-          - arn:aws:s3:::405435454034-elb/AWSLogs/405435454034/*
+          - arn:aws:s3:::129980683758-test-bucket-demo
+          - arn:aws:s3:::129980683758-test-bucket-demo/*
       # - sid: AWSLogDeliveryWrite
       #   effect: Allow
       #   principals:
