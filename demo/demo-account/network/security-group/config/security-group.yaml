@@ -7,13 +7,13 @@
 # #     Accept: application/json
 # #   request_url: https://ip-ranges.amazonaws.com/ip-ranges.json
 
-# cidr_block_groups:
-#   - cidr_blocks:
-#       - 0.0.0.0/0
-#     name: anywhere
-#   - cidr_blocks:
-#       - 10.0.0.0/16
-#     name: TestVPC
+cidr_block_groups:
+  - cidr_blocks:
+      - 0.0.0.0/0
+    name: anywhere
+  - cidr_blocks:
+      - 10.0.0.0/16
+    name: TestVPC
 
 # rules:
 #   - description: Allow jumphost ssh
