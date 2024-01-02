@@ -48,6 +48,21 @@ rules:
     from_port: 10050
     to_port: 10050
     description: Allow access from Zabbix servers
+  - name: ZabbixAgent
+    protocol: tcp
+    from_port: 10050
+    to_port: 10050
+    description: Allow Zabbix server to access agent
+  - name: ZabbixServer
+    protocol: tcp
+    from_port: 10051
+    to_port: 10051
+    description: Allow Zabbix agents to access server
+  - name: HTTPS
+    protocol: tcp
+    from_port: 443
+    to_port: 443
+    description: Allow HTTPS
 
 rule_groups:
   - name: jumphost-sg
@@ -56,34 +71,46 @@ rule_groups:
       - rdp
 
 security_groups: 
-  # - name: test-sg
-  #   vpc: VPC-SGP-TST-C-001
+  # - name: sgZabbixAgent
+  #   vpc: Eric-Test-VPC-2
   #   ingress:
-  #     - name: allow-inbound
+  #     - name: zabbix-server-inbound
+  #       mode: sg
+  #       source:
+  #         - sgZabbixServer
+  #       rules:
+  #         - from-zabbix-server 
+  #   egress:
+  #     - name: to-zabbix-server
+  #       mode: sg
+  #       target: 
+  #         - sgZabbixServer
+  #       rules:
+  #         - zabbix-agent
+  # - name: sgZabbixServer
+  #   vpc: Eric-Test-VPC-2
+  #   ingress:
+  #     - name: zabbix-agent-inbound
+  #       mode: sg
+  #       source: 
+  #         - sgZabbixServer
+  #       rules:
+  #         - zabbix-agent
+  #     - name: zabbix-ui-access
   #       mode: cidr
   #       source:
-  #         - "0.0.0.0/0"
+  #         - anywhere
   #       rules:
-  #         - ssh
+  #         - https-443-tcp
   #   egress:
   #     - name: allow-outbound
-  #       target: anywhere
+  #       target: 
+  #         - anywhere
   #       rules:
   #         - all-all
-  # - name: test-galvin-02
-  #   vpc: VPC-SGP-TST-C-001
-  #   ingress:
-  #     - name: allow-inbound
-  #       mode: cidr
-  #       source:
-  #         - "0.0.0.0/0"
-  #       rules:
-  #         - rdp
-  #   egress:
-  #     - name: allow-outbound
-  #       target: anywhere
-  #       rules:
-  #         - all-all
+
+
+
   - name: sgZabbixAgent
     vpc: Eric-Test-VPC-2
     ingress:
@@ -92,32 +119,33 @@ security_groups:
         source:
           - sgZabbixServer
         rules:
-          - from-zabbix-server 
+          - ZabbixAgent
     egress:
       - name: to-zabbix-server
         mode: sg
-        target: 
+        target:
           - sgZabbixServer
         rules:
-          - zabbix-agent
+          - ZabbixServer
+
   - name: sgZabbixServer
     vpc: Eric-Test-VPC-2
     ingress:
       - name: zabbix-agent-inbound
         mode: sg
-        source: 
-          - sgZabbixServer
+        source:
+          - sgZabbixAgent
         rules:
-          - zabbix-agent
+          - ZabbixServer
       - name: zabbix-ui-access
         mode: cidr
         source:
           - anywhere
         rules:
-          - https-443-tcp
+          - HTTPS
     egress:
       - name: allow-outbound
-        target: 
+        target:
           - anywhere
         rules:
           - all-all
