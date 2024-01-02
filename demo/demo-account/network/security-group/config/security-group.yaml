@@ -137,7 +137,7 @@ security_groups:
         source:
           - anywhere
         rules:
-          - HTTPS
+          - https-443-tcp
     egress:
       - name: allow-outbound
         target:
