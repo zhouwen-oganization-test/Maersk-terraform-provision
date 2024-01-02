@@ -122,7 +122,7 @@ security_groups:
   #       rules:
   #         - all-all
   - name: sgZabbixAgent
-    vpc: Eric-Test-VPC
+    vpc: Eric-Test-VPC-2
     ingress:
       - name: zabbix-server-inbound
         mode: sg
@@ -139,7 +139,7 @@ security_groups:
           - ZabbixServer
 
   - name: sgZabbixServer
-    vpc: Eric-Test-VPC
+    vpc: Eric-Test-VPC-2
     ingress:
       - name: zabbix-agent-inbound
         mode: sg
