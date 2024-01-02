@@ -38,16 +38,26 @@ rules:
     name: PostgreSQL
     protocol: tcp
     to_port: 5432
-  - name: zabbix-agent
-    protocol: tcp
-    from_port: 10051
-    to_port: 10051
-    description: Allow access from Zabbix agents
-  - name: from-zabbix-server
+  # - name: zabbix-agent
+  #   protocol: tcp
+  #   from_port: 10051
+  #   to_port: 10051
+  #   description: Allow access from Zabbix agents
+  # - name: from-zabbix-server
+  #   protocol: tcp
+  #   from_port: 10050
+  #   to_port: 10050
+  #   description: Allow access from Zabbix servers
+  - name: ZabbixAgent
     protocol: tcp
     from_port: 10050
     to_port: 10050
-    description: Allow access from Zabbix servers
+    description: Allow Zabbix server to access agent
+  - name: ZabbixServer
+    protocol: tcp
+    from_port: 10051
+    to_port: 10051
+    description: Allow Zabbix agents to access server
 
 rule_groups:
   - name: jumphost-sg
