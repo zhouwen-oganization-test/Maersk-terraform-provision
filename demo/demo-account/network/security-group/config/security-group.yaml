@@ -1,11 +1,11 @@
-aws_ip_ranges:
-  excluding_services:
-    - EC2
-    - S3
-    - DYNAMODB
-  request_headers:
-    Accept: application/json
-  request_url: https://ip-ranges.amazonaws.com/ip-ranges.json
+# aws_ip_ranges:
+#   excluding_services:
+#     - EC2
+#     - S3
+#     - DYNAMODB
+#   request_headers:
+#     Accept: application/json
+#   request_url: https://ip-ranges.amazonaws.com/ip-ranges.json
 
 cidr_block_groups:
   - cidr_blocks:
