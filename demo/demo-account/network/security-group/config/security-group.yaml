@@ -11,6 +11,9 @@ cidr_block_groups:
   - cidr_blocks:
       - 0.0.0.0/0
     name: anywhere
+  - cidr_blocks:
+      - 10.0.0.0/16
+    name: TestVPC
 
 rules:
   - description: Allow jumphost ssh
@@ -149,3 +152,24 @@ security_groups:
           - anywhere
         rules:
           - all-all
+
+  - name: sgZabbixDB
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: zabbix-server-inbound
+        mode: sg
+        source:
+          - sgZabbixServer
+        rules:
+          - MYSQL/Aurora
+
+  - name: sgMgmt
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: mgmt-access
+        mode: cidr
+        source:
+          - TestVPC
+        rules:
+          - ssh
+          - rdp
