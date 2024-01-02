@@ -149,3 +149,24 @@ security_groups:
           - anywhere
         rules:
           - all-all
+
+  - name: sgZabbixDB
+    vpc: Eric-Test-VPC
+    ingress:
+      - name: zabbix-server-inbound
+        mode: sg
+        source:
+          - sgZabbixServer
+        rules:
+          - MYSQL/Aurora
+
+  - name: sgMgmt
+    vpc: Eric-Test-VPC
+    ingress:
+      - name: mgmt-access
+        mode: cidr
+        source:
+          - TestVPC
+        rules:
+          - ssh
+          - rdp
