@@ -4,10 +4,9 @@ ec2_instances:
     subnet: Eric-Test-VPC-Public-a
     security_groups:
       - default
-      - test-sg
     instance_type: t3.small
     iam_instance_profile: EC2-test-role 
-    eip: VPC-SGP-TST-C-1-ap-southeast-1a
+    eip: test-eip
     root_block_device:
       volume_type: gp3 
       volume_size: 20
