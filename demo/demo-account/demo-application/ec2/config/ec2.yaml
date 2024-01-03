@@ -1,12 +1,12 @@
 ec2_instances: 
   - name: test-host 
     ami: ami-0896ef7bec0d0e792
-    subnet: test-eip
+    subnet: Eric-Test-VPC-Public-a
     security_groups:
       - default
     instance_type: t3.small
     iam_instance_profile: EC2-test-role 
-    eip: VPC-SGP-TST-C-1-ap-southeast-1a
+    eip: test-eip
     root_block_device:
       volume_type: gp3 
       volume_size: 20
