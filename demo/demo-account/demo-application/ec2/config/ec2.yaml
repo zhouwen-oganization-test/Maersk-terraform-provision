@@ -1,7 +1,7 @@
 ec2_instances: 
   - name: test-host 
     ami: ami-0896ef7bec0d0e792
-    subnet: SN-SGP-TST-PRT-AP01-AZA
+    subnet: Eric-Test-VPC-Public-a
     security_groups:
       - default
       - test-sg
