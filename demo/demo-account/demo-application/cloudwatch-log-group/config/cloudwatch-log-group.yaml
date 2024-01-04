@@ -8,14 +8,14 @@ log_groups:
         - sid: LogPublishingToCloudWatchLogGroup
           effect: Allow
           principals:
-            type: Service
-            identifiers:
-              - "es.amazonaws.com"
-            actions:
-              - "logs:PutLogEvents"
-              - "logs:PutLogEventsBatch"
-              - "logs:CreateLogStream"
-            resources:
-              - "arn:aws:logs:*"
+            - type: Service
+              identifiers:
+                - "es.amazonaws.com"
+          actions:
+            - "logs:PutLogEvents"
+            - "logs:PutLogEventsBatch"
+            - "logs:CreateLogStream"
+          resources:
+            - "arn:aws:logs:*"
     tags:
       test: test
