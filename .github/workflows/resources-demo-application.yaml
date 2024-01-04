@@ -48,6 +48,8 @@
                   - "${{env.working_path}}/fsx/**"
                 opensearch:
                   - "${{env.working_path}}/opensearch/**"
+                cloudwatch-log-group:
+                  - "${{env.working_path}}/cloudwatch-log-group/**"
 
     stage:
       needs: preparation

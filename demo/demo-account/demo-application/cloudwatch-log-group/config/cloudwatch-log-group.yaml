@@ -1,0 +1,21 @@
+log_groups: 
+  - name: test-log-group 
+    log_group_class: STANDARD 
+    retention_in_days: 7 
+    policies:
+      pocicy_name: test-policy
+      statement:
+        - sid: LogPublishingToCloudWatchLogGroup
+          effect: Allow
+          principals:
+            - type: Service
+              identifiers:
+                - "es.amazonaws.com"
+          actions:
+            - "logs:PutLogEvents"
+            - "logs:PutLogEventsBatch"
+            - "logs:CreateLogStream"
+          resources:
+            - "arn:aws:logs:*"
+    tags:
+      test: test
