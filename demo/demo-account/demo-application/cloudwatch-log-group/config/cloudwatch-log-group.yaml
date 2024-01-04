@@ -1,6 +1,6 @@
 log_groups: 
-  - name: test-log-group 
-    log_group_class: INFREQUENT_ACCESS
+  - name: test-log-group-1 
+    log_group_class: STANDARD 
     retention_in_days: 7 
     policies:
       pocicy_name: test-policy
