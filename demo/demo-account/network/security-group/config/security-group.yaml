@@ -74,72 +74,72 @@ rule_groups:
       - rdp
 
 security_groups: 
-  - name: sgZabbixAgent
-    vpc: Eric-Test-VPC-2
-    ingress:
-      - name: zabbix-server-inbound
-        mode: sg
-        source:
-          - sgZabbixServer
-        rules:
-          - ZabbixAgent
-    egress:
-      - name: to-zabbix-server
-        mode: sg
-        target:
-          - sgZabbixServer
-        rules:
-          - ZabbixServer
+  # - name: sgZabbixAgent
+  #   vpc: Eric-Test-VPC-2
+  #   ingress:
+  #     - name: zabbix-server-inbound
+  #       mode: sg
+  #       source:
+  #         - sgZabbixServer
+  #       rules:
+  #         - ZabbixAgent
+  #   egress:
+  #     - name: to-zabbix-server
+  #       mode: sg
+  #       target:
+  #         - sgZabbixServer
+  #       rules:
+  #         - ZabbixServer
 
-  - name: sgZabbixServer
-    vpc: Eric-Test-VPC-2
-    ingress:
-      - name: zabbix-agent-inbound
-        mode: sg
-        source:
-          - sgZabbixAgent
-        rules:
-          - ZabbixServer
-      - name: zabbix-ui-access
-        mode: cidr
-        source:
-          - anywhere
-        rules:
-          - HTTPS
-    egress:
-      - name: allow-outbound
-        target:
-          - anywhere
-        rules:
-          - all-all
+  # - name: sgZabbixServer
+  #   vpc: Eric-Test-VPC-2
+  #   ingress:
+  #     - name: zabbix-agent-inbound
+  #       mode: sg
+  #       source:
+  #         - sgZabbixAgent
+  #       rules:
+  #         - ZabbixServer
+  #     - name: zabbix-ui-access
+  #       mode: cidr
+  #       source:
+  #         - anywhere
+  #       rules:
+  #         - HTTPS
+  #   egress:
+  #     - name: allow-outbound
+  #       target:
+  #         - anywhere
+  #       rules:
+  #         - all-all
 
-  - name: sgZabbixDB
-    vpc: Eric-Test-VPC-2
-    ingress:
-      - name: zabbix-server-inbound
-        mode: sg
-        source:
-          - sgZabbixServer
-        rules:
-          - MYSQL/Aurora
+  # - name: sgZabbixDB
+  #   vpc: Eric-Test-VPC-2
+  #   ingress:
+  #     - name: zabbix-server-inbound
+  #       mode: sg
+  #       source:
+  #         - sgZabbixServer
+  #       rules:
+  #         - MYSQL/Aurora
 
-  - name: sgMgmt
-    vpc: Eric-Test-VPC-2
-    ingress:
-      - name: mgmt-access
-        mode: cidr
-        source:
-          - TestVPC
-        rules:
-          - ssh
-          - rdp
+  # - name: sgMgmt
+  #   vpc: Eric-Test-VPC-2
+  #   ingress:
+  #     - name: mgmt-access
+  #       mode: cidr
+  #       source:
+  #         - TestVPC
+  #       rules:
+  #         - ssh
+  #         - rdp
 
-  - name: sgZabbixDB2
-    vpc: Eric-Test-VPC-2
-    ingress:
-      - name: zabbix-server-inbound
-        mode: sg
-        source:
-          - sgZabbixServer
-        rules:
-          - MYSQL/Aurora
+  # - name: sgZabbixDB2
+  #   vpc: Eric-Test-VPC-2
+  #   ingress:
+  #     - name: zabbix-server-inbound
+  #       mode: sg
+  #       source:
+  #         - sgZabbixServer
+  #       rules:
+  #         - MYSQL/Aurora
