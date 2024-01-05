@@ -34,7 +34,7 @@ vpcs:
     dhcp_options_ntp_servers: [ 169.254.169.123 ]
     enable_flow_log: true
     flow_log_destination_type: s3
-    flow_log_destination_arn: a-drift-remediation-test-s3-129980683758
+    flow_log_destination: a-drift-remediation-test-s3-129980683758
     flow_log_traffic_type: ALL
     vpc_flow_log_tags:
       test: test
