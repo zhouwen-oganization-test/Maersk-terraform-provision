@@ -3,7 +3,7 @@ lbs:
     load_balancer_type: application
     internal: true
     ip_address_type: null
-    vpc: VPC-SGP-TST-C-001
+    vpc: VPC-SGP-TST-C-1
     security_groups:
       - default
     subnet_mapping:
