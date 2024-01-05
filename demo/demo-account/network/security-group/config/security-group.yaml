@@ -73,7 +73,7 @@ rule_groups:
       - ssh
       - rdp
 
-security_groups: 
+security_groups: [] 
   # - name: sgZabbixAgent
   #   vpc: Eric-Test-VPC-2
   #   ingress:
