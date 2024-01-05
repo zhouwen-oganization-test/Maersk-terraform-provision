@@ -14,7 +14,8 @@ lbs:
         protocol: HTTP 
         target_group_name: prdapp
     http_tcp_listener_rules:
-      - priority: 100
+      - name: lst-rule-1
+        priority: 100
         http_tcp_listener_port: 8080
         actions:
           # - type: redirect
@@ -28,7 +29,10 @@ lbs:
         conditions:
           - path_patterns: 
               - /forward/*
-      - priority: 101
+        tags:
+          test: test
+      - name: lst-rule-2 
+        priority: 101
         http_tcp_listener_port: 8080
         actions:
           - type: redirect
