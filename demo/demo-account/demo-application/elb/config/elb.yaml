@@ -30,7 +30,7 @@ lbs:
           - path_patterns: 
               - /forward/*
         tags:
-          test: test
+          test: test2
       - name: lst-rule-2 
         priority: 101
         http_tcp_listener_port: 8080
