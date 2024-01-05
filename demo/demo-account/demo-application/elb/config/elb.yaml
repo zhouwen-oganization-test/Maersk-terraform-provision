@@ -17,16 +17,29 @@ lbs:
       - priority: 100
         http_tcp_listener_port: 8080
         actions:
+          # - type: redirect
+          #   host: www.test.com.sg
+          #   path: /
+          #   port: 80
+          #   protocol: HTTP
+          #   status_code: HTTP_301
+          - type: forward
+            target_group_name: prdapp
+        conditions:
+          - path_patterns: 
+              - /forward/*
+      - priority: 101
+        http_tcp_listener_port: 8080
+        actions:
           - type: redirect
             host: www.test.com.sg
             path: /
             port: 80
             protocol: HTTP
             status_code: HTTP_301
-          - type: forward
-            target_group_name: prdapp
         conditions:
-          - path_patterns: ["/static/*"]
+          - path_patterns: 
+            - /redirect/*
     enable_deletion_protection: false
     #    access_logs:
     #      enabled: true
@@ -62,5 +75,5 @@ lbs:
     attachments:
       - name: tst-ath-0
         target_group_name: prdapp
-        target: test
+        target: test-host
         port: 8080
