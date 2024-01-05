@@ -15,161 +15,161 @@ cidr_block_groups:
       - 10.0.0.0/16
     name: TestVPC
 
-# rules:
-#   - description: Allow jumphost ssh
-#     from_port: 22
-#     name: ssh
-#     protocol: tcp
-#     to_port: 22
-#   - description: Allow jumphost rdp
-#     from_port: 3389
-#     name: rdp
-#     protocol: tcp
-#     to_port: 3389
-#   - description: Allow intra ping
-#     from_port: -1
-#     name: ICMP
-#     protocol: icmp
-#     to_port: -1
-#   - description: Allow MYSQL/Aurora
-#     from_port: 3306
-#     name: MYSQL/Aurora
-#     protocol: tcp
-#     to_port: 3306
-#   - description: Allow PostgreSQL
-#     from_port: 5432
-#     name: PostgreSQL
-#     protocol: tcp
-#     to_port: 5432
-#   - name: zabbix-agent
-#     protocol: tcp
-#     from_port: 10051
-#     to_port: 10051
-#     description: Allow access from Zabbix agents
-#   - name: from-zabbix-server
-#     protocol: tcp
-#     from_port: 10050
-#     to_port: 10050
-#     description: Allow access from Zabbix servers
-#   - name: ZabbixAgent
-#     protocol: tcp
-#     from_port: 10050
-#     to_port: 10050
-#     description: Allow Zabbix server to access agent
-#   - name: ZabbixServer
-#     protocol: tcp
-#     from_port: 10051
-#     to_port: 10051
-#     description: Allow Zabbix agents to access server
-#   - name: HTTPS
-#     protocol: tcp
-#     from_port: 443
-#     to_port: 443
-#     description: Allow HTTPS
+rules:
+  - description: Allow jumphost ssh
+    from_port: 22
+    name: ssh
+    protocol: tcp
+    to_port: 22
+  - description: Allow jumphost rdp
+    from_port: 3389
+    name: rdp
+    protocol: tcp
+    to_port: 3389
+  - description: Allow intra ping
+    from_port: -1
+    name: ICMP
+    protocol: icmp
+    to_port: -1
+  - description: Allow MYSQL/Aurora
+    from_port: 3306
+    name: MYSQL/Aurora
+    protocol: tcp
+    to_port: 3306
+  - description: Allow PostgreSQL
+    from_port: 5432
+    name: PostgreSQL
+    protocol: tcp
+    to_port: 5432
+  - name: zabbix-agent
+    protocol: tcp
+    from_port: 10051
+    to_port: 10051
+    description: Allow access from Zabbix agents
+  - name: from-zabbix-server
+    protocol: tcp
+    from_port: 10050
+    to_port: 10050
+    description: Allow access from Zabbix servers
+  - name: ZabbixAgent
+    protocol: tcp
+    from_port: 10050
+    to_port: 10050
+    description: Allow Zabbix server to access agent
+  - name: ZabbixServer
+    protocol: tcp
+    from_port: 10051
+    to_port: 10051
+    description: Allow Zabbix agents to access server
+  - name: HTTPS
+    protocol: tcp
+    from_port: 443
+    to_port: 443
+    description: Allow HTTPS
 
-# rule_groups:
-#   - name: jumphost-sg
-#     rules:
-#       - ssh
-#       - rdp
+rule_groups:
+  - name: jumphost-sg
+    rules:
+      - ssh
+      - rdp
 
-# security_groups: 
-  # - name: sgZabbixAgent
-  #   vpc: Eric-Test-VPC-2
-  #   ingress:
-  #     - name: zabbix-server-inbound
-  #       mode: sg
-  #       source:
-  #         - sgZabbixServer
-  #       rules:
-  #         - from-zabbix-server 
-  #   egress:
-  #     - name: to-zabbix-server
-  #       mode: sg
-  #       target: 
-  #         - sgZabbixServer
-  #       rules:
-  #         - zabbix-agent
-  # - name: sgZabbixServer
-  #   vpc: Eric-Test-VPC-2
-  #   ingress:
-  #     - name: zabbix-agent-inbound
-  #       mode: sg
-  #       source: 
-  #         - sgZabbixServer
-  #       rules:
-  #         - zabbix-agent
-  #     - name: zabbix-ui-access
-  #       mode: cidr
-  #       source:
-  #         - anywhere
-  #       rules:
-  #         - https-443-tcp
-  #   egress:
-  #     - name: allow-outbound
-  #       target: 
-  #         - anywhere
-  #       rules:
-  #         - all-all
+security_groups: 
+  - name: sgZabbixAgent
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: zabbix-server-inbound
+        mode: sg
+        source:
+          - sgZabbixServer
+        rules:
+          - from-zabbix-server 
+    egress:
+      - name: to-zabbix-server
+        mode: sg
+        target: 
+          - sgZabbixServer
+        rules:
+          - zabbix-agent
+  - name: sgZabbixServer
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: zabbix-agent-inbound
+        mode: sg
+        source: 
+          - sgZabbixServer
+        rules:
+          - zabbix-agent
+      - name: zabbix-ui-access
+        mode: cidr
+        source:
+          - anywhere
+        rules:
+          - https-443-tcp
+    egress:
+      - name: allow-outbound
+        target: 
+          - anywhere
+        rules:
+          - all-all
 
 
 
-  # - name: sgZabbixAgent
-  #   vpc: Eric-Test-VPC-2
-  #   ingress:
-  #     - name: zabbix-server-inbound
-  #       mode: sg
-  #       source:
-  #         - sgZabbixServer
-  #       rules:
-  #         - ZabbixAgent
-  #   egress:
-  #     - name: to-zabbix-server
-  #       mode: sg
-  #       target:
-  #         - sgZabbixServer
-  #       rules:
-  #         - ZabbixServer
+  - name: sgZabbixAgent
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: zabbix-server-inbound
+        mode: sg
+        source:
+          - sgZabbixServer
+        rules:
+          - ZabbixAgent
+    egress:
+      - name: to-zabbix-server
+        mode: sg
+        target:
+          - sgZabbixServer
+        rules:
+          - ZabbixServer
 
-  # - name: sgZabbixServer
-  #   vpc: Eric-Test-VPC-2
-  #   ingress:
-  #     - name: zabbix-agent-inbound
-  #       mode: sg
-  #       source:
-  #         - sgZabbixAgent
-  #       rules:
-  #         - ZabbixServer
-  #     - name: zabbix-ui-access
-  #       mode: cidr
-  #       source:
-  #         - anywhere
-  #       rules:
-  #         - HTTPS
-  #   egress:
-  #     - name: allow-outbound
-  #       target:
-  #         - anywhere
-  #       rules:
-  #         - all-all
+  - name: sgZabbixServer
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: zabbix-agent-inbound
+        mode: sg
+        source:
+          - sgZabbixAgent
+        rules:
+          - ZabbixServer
+      - name: zabbix-ui-access
+        mode: cidr
+        source:
+          - anywhere
+        rules:
+          - HTTPS
+    egress:
+      - name: allow-outbound
+        target:
+          - anywhere
+        rules:
+          - all-all
 
-  # - name: sgZabbixDB
-  #   vpc: Eric-Test-VPC-2
-  #   ingress:
-  #     - name: zabbix-server-inbound
-  #       mode: sg
-  #       source:
-  #         - sgZabbixServer
-  #       rules:
-  #         - MYSQL/Aurora
+  - name: sgZabbixDB
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: zabbix-server-inbound
+        mode: sg
+        source:
+          - sgZabbixServer
+        rules:
+          - MYSQL/Aurora
 
-  # - name: sgMgmt
-  #   vpc: Eric-Test-VPC-2
-  #   ingress:
-  #     - name: mgmt-access
-  #       mode: cidr
-  #       source:
-  #         - TestVPC
-  #       rules:
-  #         - ssh
-  #         - rdp
+  - name: sgMgmt
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: mgmt-access
+        mode: cidr
+        source:
+          - TestVPC
+        rules:
+          - ssh
+          - rdp
