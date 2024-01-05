@@ -14,7 +14,7 @@ lbs:
         protocol: HTTP 
         target_group_name: prdapp
     http_tcp_listener_rules:
-      - name: test-rule-1
+      - name: rule-1
         priority: 100
         http_tcp_listener_port: 8080
         actions:
@@ -31,7 +31,7 @@ lbs:
               - /forward/*
         tags:
           test: test
-      - name: test-rule-2
+      - name: rule-2 
         priority: 101
         http_tcp_listener_port: 8080
         actions:
