@@ -1,35 +1,35 @@
-opensearch: 
-  - domain_name: maersk-opensearch-test
-    master_instance_type: r6g.large.search
-    instance_type: r6g.large.search
-    instance_count: 2
-    engine_version: OpenSearch_2.11
-    # encrypt_kms_key_id: "" 
-    vpc: VPC-SGP-TST-C-1
-    vpc_options:
-      security_groups:
-        - default
-      subnets:
-        - SN-SGP-TST-PRT-AP01-AZB
-        - SN-SGP-TST-PRT-AP01-AZA
-    advanced_security_options:
-      enabled: true
-      internal_user_database_enabled: true
-      master_user_options:
-        master_user_name: root
-    auto_tune_options:
-      desired_state: ENABLED
-      rollback_on_disable: "NO_ROLLBACK"
-      maintenance_schedule: []
-    ebs_options:
-      ebs_enabled: true
-      volume_size: 10
-      volume_type: gp3
-      throughput: 125
-      iops: 3000
-    off_peak_window_options:
-      enabled: true
-      off_peak_window:
-        window_start_time:
-          hours: 13 
-          minutes: 0
+opensearch: [] 
+#   - domain_name: maersk-opensearch-test
+#     master_instance_type: r6g.large.search
+#     instance_type: r6g.large.search
+#     instance_count: 2
+#     engine_version: OpenSearch_2.11
+#     # encrypt_kms_key_id: "" 
+#     vpc: VPC-SGP-TST-C-1
+#     vpc_options:
+#       security_groups:
+#         - default
+#       subnets:
+#         - SN-SGP-TST-PRT-AP01-AZB
+#         - SN-SGP-TST-PRT-AP01-AZA
+#     advanced_security_options:
+#       enabled: true
+#       internal_user_database_enabled: true
+#       master_user_options:
+#         master_user_name: root
+#     auto_tune_options:
+#       desired_state: ENABLED
+#       rollback_on_disable: "NO_ROLLBACK"
+#       maintenance_schedule: []
+#     ebs_options:
+#       ebs_enabled: true
+#       volume_size: 10
+#       volume_type: gp3
+#       throughput: 125
+#       iops: 3000
+#     off_peak_window_options:
+#       enabled: true
+#       off_peak_window:
+#         window_start_time:
+#           hours: 13 
+#           minutes: 0
