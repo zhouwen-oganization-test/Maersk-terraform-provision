@@ -29,7 +29,7 @@ lbs:
           - path_patterns: 
               - /forward/*
       - priority: 101
-        http_tcp_listener_port: 80
+        http_tcp_listener_port: 8080
         actions:
           - type: redirect
             host: www.test.com.sg
