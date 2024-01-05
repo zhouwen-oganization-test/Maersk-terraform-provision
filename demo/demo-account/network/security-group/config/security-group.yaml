@@ -133,3 +133,13 @@ security_groups:
         rules:
           - ssh
           - rdp
+
+  - name: sgZabbixDB2
+    vpc: Eric-Test-VPC-2
+    ingress:
+      - name: zabbix-server-inbound
+        mode: sg
+        source:
+          - sgZabbixServer
+        rules:
+          - MYSQL/Aurora
