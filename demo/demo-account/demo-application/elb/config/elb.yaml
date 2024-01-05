@@ -17,12 +17,12 @@ lbs:
       - priority: 100
         http_tcp_listener_port: 8080
         actions:
-          - type: redirect
-            host: www.test.com.sg
-            path: /
-            port: 80
-            protocol: HTTP
-            status_code: HTTP_301
+          # - type: redirect
+          #   host: www.test.com.sg
+          #   path: /
+          #   port: 80
+          #   protocol: HTTP
+          #   status_code: HTTP_301
           - type: forward
             target_group_name: prdapp
         conditions:
