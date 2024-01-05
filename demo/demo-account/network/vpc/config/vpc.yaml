@@ -36,6 +36,9 @@ vpcs:
     flow_log_destination_type: s3
     flow_log_destination: a-drift-remediation-test-s3-129980683758
     flow_log_traffic_type: ALL
+    flow_log_file_format: plain-text
+    flow_log_hive_compatible_partitions: false
+    flow_log_per_hour_partition: true
     vpc_flow_log_tags:
       test: test
 
