@@ -26,7 +26,20 @@ lbs:
           - type: forward
             target_group_name: prdapp
         conditions:
-          - path_patterns: ["/static/*"]
+          - path_patterns: 
+              - /forward/*
+      - priority: 101
+        http_tcp_listener_port: 80
+        actions:
+          - type: redirect
+            host: www.test.com.sg
+            path: /
+            port: 80
+            protocol: HTTP
+            status_code: HTTP_301
+        conditions:
+          - path_patterns: 
+            - /redirect/*
     enable_deletion_protection: false
     #    access_logs:
     #      enabled: true
