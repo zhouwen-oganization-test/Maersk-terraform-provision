@@ -23,4 +23,9 @@ ec2_instances: []
   #   source_dest_check: false
   #   tags:
   #     test-tag: little kitty eat 2 cookies
-
+ec2_host:
+  - name: test-host
+    instance_type: c5.18xlarge
+    availability_zone: ap-southeast-1a
+    host_recovery: "on"
+    auto_placement: "on"
