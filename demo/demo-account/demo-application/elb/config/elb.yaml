@@ -72,4 +72,5 @@ lbs:
         target_group_name: prdapp
         target:
           - test-host
+          - test-host2
         port: 8080
